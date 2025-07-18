@@ -20,7 +20,8 @@ Flow of contents:
                                   os.mkdir(), os.makedirs(), os.rmdir(), shutil.rmtree(), os.remove(), 
                                   os.rename()
 4. Running System Commands: os.system(), os.popen(), os.execv() os.execvp(), os.execvpe()
-5. Environment Variables: os.environ, os.getenv(), os.putenv()
+5. Working with file permissions: os.chmod()
+6. Environment Variables: os.environ, os.getenv(), os.putenv()
 '''
 
 import os
@@ -476,8 +477,23 @@ os.execvpe(
 print("This line will not be executed if os.execvp() is called")  # This line will not be executed
 
 
+#-----------------------------------------------------------------------------------------------------------#
+#------------------------------------- 5. Working with file permissions ------------------------------------#
+#-----------------------------------------------------------------------------------------------------------#
+
+os.system('echo "echo Hello World!!!" > demo_permission.sh')  # Create a demo executable .sh file
+os.system('ls -l ./demo_permission.sh')  # Check the file permissions before changing
+# -rw-r--r--. 1 longdpt longdpt 20 Jul 18 11:26 ./demo_permission.sh
+
+
+# os.chmod(path, mode) is used to change the file permissions at the specified path (path) to the given mode (mode).
+os.chmod('./demo_permission.sh', 0o755)  # Change permissions to make it executable
+os.system('ls -l ./demo_permission.sh')  # Check the file permissions after changing
+# -rwxr-xr-x. 1 longdpt longdpt 20 Jul 18 11:26 ./demo_permission.sh
+
+
 #----------------------------------------------------------------------------------------------#
-#------------------------------- 5. Environment Variables -------------------------------------#
+#------------------------------- 6. Environment Variables -------------------------------------#
 #----------------------------------------------------------------------------------------------#
 
 import os
