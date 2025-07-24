@@ -10,8 +10,9 @@ Flow of contents:
 3. Extract path object components: name, suffix, stem, parent, parents, suffix, suffixes, parts, root
 4. Checking path properties: exists(), is_file(), is_dir(), is_symlink(), is_absolute(), is_relative_to()
 5. Get Absolute Path - Path Resolution: resolve(), absolute()
-6. Directory and File operations: mkdir(), rmdir(), touch(), symlink_to() unlink(),
-                                  rename(), replace(), 
+6. Directory and File operations: mkdir(), rmdir(), touch(), symlink_to(), 
+                                  unlink() [remove a file or symlink],
+                                  replace() [move and rename a file or directory] 
                                   
 '''
 
@@ -439,6 +440,12 @@ data_dir.mkdir(exist_ok = True)  # Create 'data' directory (at existed parent di
                                  # Don't fail if exists
 
 
+# mkdir() with joinpath()
+Path('/home/longdpt/Documents/Academic/DataScience_MachineLearning/').joinpath('new_dir').mkdir(exist_ok=True)
+# Add "new_dir" to the path with .joinpath() method
+# Then use .mkdir() to create the directory at the specified path
+
+
 # mkdir() with parents=True like os.makedirs()
 data_dir_with_parents = Path('./data/subdir')
 data_dir_with_parents.mkdir(parents=True, exist_ok=True) # Don't fail if exists, and create all parent
@@ -461,13 +468,23 @@ for path_str in project_structure:
     Path(path_str).mkdir(parents=True, exist_ok=True)
 
 
+'''
+WRONG USAGE: 
+   Path.cwd().mkdir('new_dir')
+   >>> Create nothing
+'''
+
+
 #########################################
 ## rmdir() - Remove an empty directory ##
 #########################################
 
 project_path = Path('./project')
 
-# Remove an empty directory (./project/data/raw)
+# Remove an empty directory (./project/data/raw) [RECOMMENDED]
+Path(project_path / 'data').joinpath('raw').rmdir()
+
+# Remove an empty directory (./project/data/raw) [NOT RECOMMENDED]
 Path(project_path / 'data' / 'raw').rmdir()
 
 project_path.rmdir() # Raise error
@@ -496,7 +513,7 @@ path_cwd.joinpath('demo_file.txt').touch(exist_ok=True)  # Add "demo_file.txt" t
 
 '''
 WRONG USAGE: 
-    path_cwd.touch('demo_file.txt')'
+    path_cwd.touch('demo_file.txt')
     >>> Create nothing
 '''
 
@@ -527,3 +544,48 @@ print(dir_symlink_path.is_symlink())  # True
 NOTE: even if the target file or directory does not exist,
 the symlink will still be created, but it will be broken (pointing to a non-existent target).
 '''
+
+
+#######################################
+## unlink() - REMOVE FILE or SYMLINK ##
+#######################################
+
+# unlink() removes a file or a symbolic link. (like os.remove())
+
+
+# Remove a file
+Path.cwd().joinpath('demo_file.txt').unlink(missing_ok=True)  # Remove the file if it exists
+                                                              # Don't raise an error if the file does not exist
+
+
+# Remove a symbolic link to a file
+symlink_path = Path('./demo_symlink.txt')
+symlink_path.unlink(missing_ok=True)  # Remove the symlink if it exists
+                                      # Don't raise an error if the symlink does not exist
+
+
+# Remove a symbolic link to a directory
+dir_symlink_path = Path('./data_raw_symlink')
+dir_symlink_path.unlink(missing_ok=True)  # Remove the symlink if it exists
+                                          # Don't raise an error if the symlink does not exist
+
+
+#####################################################
+## replace() - MOVE and RENAME a file or directory ##
+#####################################################
+
+#--------------------------
+## Rename with replace()
+#--------------------------
+
+Path.cwd().joinpath('demo_file.txt').touch(exist_ok=True)  # Create a file to rename
+Path.cwd().joinpath('demo_dir').mkdir(exist_ok=True)  # Create a directory to rename
+
+# Rename a file
+Path('./demo_file.txt').replace('renamed_file.txt')  # Rename the file to 'renamed_file.txt'
+Path.cwd().joinpath('demo_file.txt').replace('renamed_file.txt')  # Rename the file to 'renamed_file.txt' using joinpath()
+
+# Rename a directory
+Path('./demo_dir').replace('renamed_dir')  # Rename the directory to 'renamed_dir'
+Path.cwd().joinpath('demo_dir').replace('renamed_dir')  # Rename the directory to 'renamed_dir' using joinpath()
+
