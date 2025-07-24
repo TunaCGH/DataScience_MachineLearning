@@ -106,9 +106,11 @@ print(joined_path) # dir_1/dir_2/file.txt
 joined_path = os.path.join('dir_parent/', 'dir_child/', 'file.txt')
 print(joined_path) # dir_parent/dir_child/file.txt
 
+'''
+NOTE: os.path.join() automatically handles the path separators based on the operating system.
+====> produces the same output even with or without leading or trailing slashes.
+'''
 
-## NOTE: os.path.join() automatically handles the path separators based on the operating system.
-## ====> produces the same output even with or without leading or trailing slashes.
 
 
 #-------------------------------------------------------------------------------#
@@ -379,4 +381,4 @@ print(same_file)
 print(os.path.samefile('./vscode_install_settings.txt', 'Python_Important_packages.txt'))
 # False (if the files are different or do not exist)
 
-## NOTE: This function raises an OSError if either of the paths does not exist
+''' NOTE: This function raises an OSError if either of the paths does not exist '''

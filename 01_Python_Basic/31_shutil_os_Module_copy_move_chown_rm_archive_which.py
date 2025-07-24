@@ -209,7 +209,7 @@ print(f"Terminal size: {terminal_size.columns} columns, {terminal_size.lines} li
 
 # shutil.chown(path, user=None, group=None) is used to change the ownership of a file or directory at the specified path (path).
 # user is the new owner, and group is the new group (both optional).
-# Note: This operation may require superuser privileges.
+''' Note: This operation may require superuser privileges.'''
 
 os.system('echo "echo Hello World!!!" > demo_permission.sh')  # Create a demo executable .sh file
 

@@ -5,12 +5,14 @@ The `glob` method in the `pathlib` module allows you to search for files and dir
 Unlike the traditional `os` module, `pathlib` provides a more intuitive and readable way to work with paths.
 
 Flow of contents:
-1. Create Path object: PurePath, Concrete Path, slash /
+1. Create Path object: PurePath, Concrete Path, Join Path slash /
 2. Get current working directory and home directory: Path.cwd(), Path.home()
 3. Extract path object components: name, suffix, stem, parent, parents, suffix, suffixes, parts, root
 4. Checking path properties: exists(), is_file(), is_dir(), is_symlink(), is_absolute(), is_relative_to()
 5. Get Absolute Path - Path Resolution: resolve(), absolute()
-6. Directory and File operations: mkdir(), rmdir(), rename(), replace(), unlink(), symlink_to(), read_text(), write_text(), read_bytes(), write_bytes()
+6. Directory and File operations: mkdir(), rmdir(), touch(), symlink_to() unlink(),
+                                  rename(), replace(), 
+                                  
 '''
 
 from os import symlink
@@ -89,6 +91,18 @@ else:
 # Trying to perform file system operations on Path objects will work as expected.
 print(posix_path.exists()) # False
 # It returns False, instead of raising an error like PurePath.
+
+
+#####################################
+## Using .joinpath() to join paths ##
+#####################################
+
+demo_path = Path('dir_1')
+
+# The .joinpath() method allows you to join multiple path components together, similar to using the slash operator (/).
+new_path = demo_path.joinpath('dir_2', 'dir_3', 'example.txt') # This does not modifiy the original path object (demo_path)
+
+print(new_path)  # dir_1/dir_2/dir_3/example.txt
 
 
 ################################################
@@ -357,7 +371,7 @@ symlink_path = Path('/home/longdpt/lmstudio/lmstudio_exe')
 
 # The path_object.resolve() method returns the absolute path of the file or directory, 
 # It also resolves any symbolic links and relative paths.
-# Note: If the path does not exist, it will raise a FileNotFoundError.
+''' Note: If the path does not exist, it will raise a FileNotFoundError.'''
 
 
 absolute_path = demo_relative_path_1.resolve()
@@ -367,8 +381,10 @@ print(absolute_path)
 absolute_path_alternative = demo_relative_path_2.resolve()
 print(absolute_path_alternative)
 # /home/longdpt/Documents/Academic/DataScience_MachineLearning/DataScience_MachineLearning/02_Python_class_OOP
-# >> Note: there is a duplication of the path => this is because the path is relative to the current working directory,
-# >> and the current working directory is already inside the 'DataScience_MachineLearning' directory.
+''' 
+>> Note: there is a duplication of the path => this is because the path is relative to the current working directory,
+>> and the current working directory is already inside the 'DataScience_MachineLearning' directory.
+'''
 
 absolute_symlink_path = symlink_path.resolve()
 print(absolute_symlink_path)
@@ -391,19 +407,21 @@ absolute_symlink_path = symlink_path.absolute()
 print(absolute_symlink_path)
 # /home/longdpt/lmstudio/lmstudio_exe
 
-
+'''
 ############################################################################################################
 ## NOTE: they get the absolute path from the current working directory, not the real actual absolute path ##
 ############################################################################################################
+'''
 
 relative_symlink_path = Path('lmstudio_exe')
 
 print(relative_symlink_path.resolve())  # /home/longdpt/Documents/Academic/DataScience_MachineLearning/lmstudio_exe
 print(relative_symlink_path.absolute())  # /home/longdpt/Documents/Academic/DataScience_MachineLearning/lmstudio_exe
 
-# >> Note: the absolute path is not the actual absolute path of the symlink target, 
-# >> but rather the absolute path from the current working directory to the symlink itself.
-
+'''
+>> Note: the absolute path is not the actual absolute path of the symlink target, 
+>> but rather the absolute path from the current working directory to the symlink itself.
+'''
 
 #------------------------------------------------------------------------------------------------------------------------#
 #---------------------------------------- 6. Directory and File operations ----------------------------------------------#
@@ -469,3 +487,43 @@ shutil.rmtree(project_path)
 ## touch() - Create new file in a specific directory ##
 #######################################################
 
+path_cwd = Path.cwd()
+print(path_cwd)  # /home/longdpt/Documents/Academic/DataScience_MachineLearning
+
+# Create a new file in the current working directory
+path_cwd.joinpath('demo_file.txt').touch(exist_ok=True)  # Add "demo_file.txt" to the path_cwd
+                                                         # then use .touch() to create the file
+
+'''
+WRONG USAGE: 
+    path_cwd.touch('demo_file.txt')'
+    >>> Create nothing
+'''
+
+#####################################################
+## symlink_to() - Create a symbolic link to a file ##
+#####################################################
+
+# symlink_to() creates a symbolic link to a file or directory.
+
+
+# Create a symbolic link to the demo_file.txt
+symlink_target = Path('demo_file.txt')
+symlink_path = Path('demo_symlink.txt')
+
+symlink_path.symlink_to(symlink_target, target_is_directory=False)  # Create a symlink to the file
+print(symlink_path.is_symlink())  # True
+
+
+# Create a symbolic link to a directory
+dir_symlink_target = Path('data/raw')
+dir_symlink_path = Path('data_raw_symlink')
+
+dir_symlink_path.symlink_to(dir_symlink_target, target_is_directory=True)  # Create a symlink to the directory
+print(dir_symlink_path.is_symlink())  # True
+
+
+'''
+NOTE: even if the target file or directory does not exist,
+the symlink will still be created, but it will be broken (pointing to a non-existent target).
+'''

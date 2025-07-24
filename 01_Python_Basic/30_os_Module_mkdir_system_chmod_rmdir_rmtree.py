@@ -194,7 +194,7 @@ with os.scandir('/home/longdpt/Documents/Academic') as entries:
 ################
 
 # os.mkdir(path) creates a new directory at the specified path.
-# Note: This will raise an error if the directory already exists.   
+'''Note: This will raise an error if the directory already exists.'''
 
 
 # current working directory: '/home/longdpt/Documents/Academic/DataScience_MachineLearning/'
@@ -205,7 +205,7 @@ os.mkdir('new_directory')
 os.mkdir('/home/longdpt/Documents/Academic/DataScience_MachineLearning/new_directory_2')
 
 
-## Note: if the parent directory does not exist, it will raise a FileNotFoundError. ##
+'''Note: if the parent directory does not exist, it will raise a FileNotFoundError.'''
 try:
     os.mkdir('parent_dir/child_dir')
 except Exception as e:
@@ -226,7 +226,7 @@ os.makedirs('parent_dir/child_dir/grandchild_dir')
 # even if 'parent_dir' or 'child_dir' does not exist.
 
 
-## Note: if the directory already exists, it will raise a FileExistsError. ##
+'''Note: if the parent directory does not exist, it will raise a FileNotFoundError.'''
 try:
     os.makedirs('parent_dir/child_dir/grandchild_dir')
 except Exception as e:
@@ -239,7 +239,7 @@ except Exception as e:
 ################
 
 # os.rmdir(path) removes (deletes) the EMPTY directory at the specified path.
-# Note: This will raise an error if the directory is not empty.
+''' Note: This will raise an error if the directory is not empty. '''
 
 # Remove an empty directory
 os.rmdir('new_directory')  # This will remove the empty 'new_directory' created earlier
@@ -273,7 +273,7 @@ shutil.rmtree('parent_dir')
 os.system('echo "forsaken i am awakened" >> demo_os_remove.txt')  # Create a demo file with given content
 
 # os.remove(path) removes (deletes) the FILE at the specified path.
-# Note: This will raise an error if the file does not exist.
+''' Note: This will raise an error if the file does not exist. '''
 
 os.remove('./demo_os_remove.txt')  # This will remove the 'demo_os_remove.txt' file created earlier
 # os.remove('./demo_os_remove.txt')
@@ -293,8 +293,11 @@ except Exception as e:
 os.system('echo "forsaken i am awakened" >> demo_os_remname.txt')  # Create a demo file with given content
 
 # os.rename(src, dst) renames the file or directory from src (source) to dst (destination).
-# Note: If dst already exists, it will be replaced.
-# Note: If src does not exist, it will raise a FileNotFoundError.
+'''
+Note: If dst already exists, it will be replaced.
+Note: If src does not exist, it will raise a FileNotFoundError.
+'''
+
 os.rename('./demo_os_remname.txt', './bury_the_light.txt')  # Rename the file to 'bury_the_light.txt'
 
 
@@ -340,7 +343,7 @@ _ = os.system(commands) # Assign to underscore to avoid displaying the exit stat
 # /home/longdpt/Documents/Academic/DataScience_MachineLearning
 # 37412506
 
-## NOTE: the _ store the exit status, NOT the output of the commands.
+''' NOTE: the _ store the exit status, NOT the output of the commands. '''
 ## To capture the output of the commands, you can use os.popen() or subprocess module.
 
 
@@ -395,9 +398,11 @@ os.execv(
     '/usr/bin/ls',  # ABSOLUTE PATH to the executable file (example here is the 'ls' command)
     ['ls', '-l', '.']  # Arguments to pass to the command
 ) # (NO KEYWORD ARGUMENTS)
+'''
+Note: This will not return to the original process (after runing this, it will EXIT CURRENT PYTHON PROCESS)
+so the following lines or commands will not be executed.
+'''
 
-# Note: This will not return to the original process (after runing this, it will EXIT CURRENT PYTHON PROCESS)
-# so the following lines or commands will not be executed.
 
 print("This line will not be executed if os.execvp() is called")  # This line will not be executed
 
@@ -415,8 +420,10 @@ os.execvp(
     file = 'ls',  # Path to the executable file (don't need to be absolute, will search in PATH)
     args = ['ls', '-l', '.']  # Arguments to pass to the command
 )
-# Note: This will not return to the original process (after runing this, it wil EXIT CURRENT PYTHON PROCESS)
-# so the following lines will not be executed.
+'''
+Note: This will not return to the original process (after runing this, it will EXIT CURRENT PYTHON PROCESS)
+so the following lines or commands will not be executed.
+'''
 
 print("This line will not be executed if os.execvp() is called")  # This line will not be executed
 
@@ -433,8 +440,10 @@ os.execvpe(
     args = ['ls', '-l', '.'],  # Arguments to pass to the command
     env = os.environ  # Use the current environment variables
 )
-# Note: This will not return to the original process (after runing this, it wil EXIT CURRENT PYTHON PROCESS)
-# so the following lines will not be executed.
+'''
+Note: This will not return to the original process (after runing this, it will EXIT CURRENT PYTHON PROCESS)
+so the following lines or commands will not be executed.
+'''
 
 print("This line will not be executed if os.execvp() is called")  # This line will not be executed
 
@@ -471,8 +480,10 @@ os.execvpe(
     args = ['ls', '-l', '.'],  # Arguments to pass to the command
     env = conda_env  # Use the conda environment variables
 )
-# Note: This will not return to the original process (after runing this, it wil EXIT CURRENT PYTHON PROCESS)
-# so the following lines will not be executed.
+'''
+Note: This will not return to the original process (after runing this, it will EXIT CURRENT PYTHON PROCESS)
+so the following lines or commands will not be executed.
+'''
 
 print("This line will not be executed if os.execvp() is called")  # This line will not be executed
 
