@@ -45,6 +45,8 @@ print(f"Result of the imported function: {result}")
 ## import all functions from the module using * ##
 ##################################################
 
+''' DEMO if __name__ == "__main__" '''
+
 from demo_module_same_directory import *
 
 _ = add(5, 3)  # Assign to _ to avoid printing output in the console
