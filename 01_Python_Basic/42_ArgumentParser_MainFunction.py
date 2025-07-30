@@ -131,7 +131,7 @@ def main():
         # Calculate the circumference
         circumference = rectangle_circumference(
             length = args.length, # Get the length from the parsed arguments
-            width = args. width # Get the width from the parsed arguments
+            width = args.width # Get the width from the parsed arguments
         )
 
         # Calculate the area
