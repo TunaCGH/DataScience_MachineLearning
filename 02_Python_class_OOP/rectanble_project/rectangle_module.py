@@ -97,13 +97,13 @@ class RectangleCalculator:
             json_file_object.dump(result_dict, indent = 4)
     
 
-    def display_result(self):
+    def summary(self):
         out_message = (
             "Program ran succesfully!\n"
             f"Length = {self.length}\n"
             f"Width = {self.width}\n"
             f"perimeter = 2 * ({self.length} + {self.width}) = {self.perimeter}\n"
-            f"Area of the rectangle = {self.length} * {self.width} = {self.area}"
+            f"area = {self.length} * {self.width} = {self.area}"
         )
         logger.info(out_message)
 
