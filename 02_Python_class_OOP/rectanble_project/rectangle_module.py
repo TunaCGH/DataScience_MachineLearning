@@ -42,7 +42,7 @@ class RectangleCalculator:
     
 
     @staticmethod
-    def _validate_input(*numbers): # Internal use only, cannot call out when the module is being imported
+    def __validate_input(*numbers): # Internal use only, cannot call out when the module is being imported
         for idx, number in enumerate(numbers):
             try:
                 number = float(number)
@@ -66,14 +66,24 @@ class RectangleCalculator:
 
     @property
     def perimeter(self):
-        self._perimeter = 2 * (self.length + self.width) # Name it as "self._perimeter" to prevent user from changing its value 
-        return self._perimeter
+        self.length, self.width = self.__validate_input(self.length, self.width)
+        if (self.length is None) or self.width is None:
+            self.__perimeter = None
+        else:
+            self.__perimeter = 2 * (self.length + self.width) # Name it as "self.__perimeter" to prevent user from changing its value 
+       
+        return self.__perimeter
 
 
     @property
     def area(self):
-        self._area = self.length * self.width # Name it as "self._area" to prevent user from changing its value
-        return self._area
+        self.length, self.width = self.__validate_input(self.length, self.width)
+
+        if (self.length is None) or self.width is None:
+            self.__area = None
+        else:
+            self.__area = self.length * self.width # Name it as "self.__area" to prevent user from changing its value
+        return self.__area
 
     
     def save_result(self, json_rectangle_name):
@@ -95,9 +105,10 @@ class RectangleCalculator:
             f"perimeter = 2 * ({self.length} + {self.width}) = {self.perimeter}\n"
             f"Area of the rectangle = {self.length} * {self.width} = {self.area}"
         )
+        logger.info(out_message)
 
-    
-    def _work_flow(self, json_rectangle_name):
+
+    def _CommandLine_WorkFlow(self, json_rectangle_name):
         if json_rectangle_name != '':
             self.length, self.width = self.load_rectangle_json(json_rectangle_name)
         
