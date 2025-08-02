@@ -161,8 +161,8 @@ class RectangleCalculator:
 def main():
     try:
         calculator = RectangleCalculator(
-            #input = "02_Python_class_OOP/rectangle_project/data/",
-            #output = "02_Python_class_OOP/rectangle_project/result",
+            input = "02_Python_class_OOP/rectangle_project/data/",
+            output = "02_Python_class_OOP/rectangle_project/result",
             length = 2,
             width = 3,
             cores = 4
