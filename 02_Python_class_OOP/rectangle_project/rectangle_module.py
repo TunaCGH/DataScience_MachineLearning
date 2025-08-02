@@ -34,35 +34,27 @@ class RectangleCalculator:
         width: the width of the rectangle (for inplace calculating)
         cores: the number of CPU cores using for parallel computing
         '''
-        self.input = Path(input)
-        self.output = Path(output)
+        self.input = input
+        self.output = output
         self.__length = length
         self.__width = width
         self.cores = cores
 
         match str(self.output):
             case "":
-                return None
+                pass
             case _:
-                if (self.output.suffix != "") and (self.output.parent.exists()):
-                    self.output = self.output.stem.mkdir(exist_ok = True)
+                self.output = Path(self.output)
+                if (self.output.suffix != ""):
+                    self.output = self.output.stem.mkdir(parents = True, exist_ok = True)
                     logger.warning(f"Your output path should be a directory, not a file, automatically set as {self.output}")
-
-                elif self.output.parent.exists():
-                    self.output.mkdir(exist_ok=True)
-
-                elif not self.output.parent.exists():
-                    self.output = Path.cwd().joinpath("result")
-                    self.output.mkdir()
-                    logger.warning(f"Your output path's parent directory does not exists, automatically set as {self.output}")
                 else:
-                    pass
+                    self.output.mkdir()
 
     
-
     @staticmethod
     def __validate_input(*numbers): # Internal use only, cannot call out when the module is being imported
-        numeric_pattern = r"^\d+\.?\d+$"
+        numeric_pattern = r"^\d+\.?\d*$"
         numbers = list(numbers)
         for idx, number in enumerate(numbers):
             if re.match(numeric_pattern, str(number)):
@@ -165,24 +157,27 @@ class RectangleCalculator:
 def main():
     try:
         calculator = RectangleCalculator(
-            #input = "02_Python_class_OOP/rectangle_project/data/",
-            #output = "02_Python_class_OOP/rectangle_project/result",
+            input = "02_Python_class_OOP/rectangle_project/data/",
+            output = "02_Python_class_OOP/rectangle_project/result/",
             length = 2,
             width = 3,
             cores = 4
         )
 
-        if calculator.input.suffix == ".json":
-            calculator._SingleInput_WorkFlow(calculator.input)
-        
-        elif calculator.input.is_dir():
-            input_files = [(entry.name,) for entry in calculator.input.glob("*.json") ]
+        if calculator.input != "":
+            calculator.input = Path(calculator.input)
 
-            with multiprocessing.Pool(processes = calculator.cores) as pool:
-                pool.starmap(func = calculator._SingleInput_WorkFlow, iterable = input_files)
+            if calculator.input.suffix == ".json":
+                calculator._SingleInput_WorkFlow(calculator.input)
+            
+            elif calculator.input.is_dir():
+                input_files = [(entry.name,) for entry in calculator.input.glob("*.json") ]
+
+                with multiprocessing.Pool(processes = calculator.cores) as pool:
+                    pool.starmap(func = calculator._SingleInput_WorkFlow, iterable = input_files)
 
         else:
-            calculator.summary()
+            calculator._SingleInput_WorkFlow('')
     
     except Exception as e:
         logger.error(e)
