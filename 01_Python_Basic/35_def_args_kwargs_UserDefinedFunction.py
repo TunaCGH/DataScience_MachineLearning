@@ -256,7 +256,7 @@ greet_user("Bob", "Bonjour")
 #-------------------------------------------------------------------------------------------------------------#
 
 # *args allows you to pass a variable number of positional arguments to a function.
-# It collects all the extra positional arguments into a tuple.
+# It collects all the extra positional arguments into a TUPLE.
 # This is useful when you don't know in advance how many arguments will be passed.
 
 
@@ -299,7 +299,29 @@ print(sum_numbers(30)) # 30
 
 
 ###############################################
-## Example 3: concatenate strings with *args ##
+## Example 3: combine *args with enumerate() ##
+###############################################
+
+def sign_check(*nums):
+    """Check the sign of the numbers, return: positive, negative or zero"""
+    nums = list(nums) # Convert to string to enable modification
+    
+    for idx, number in enumerate(nums):
+        if number > 0:
+            nums[idx] = "positive"
+        elif number < 0:
+            nums[idx] = "negative"
+        else:
+            nums[idx] = "zero"
+    
+    return nums
+
+print(sign_check(2, 2.4, 3.5, -6, 1, -22.0, 0))
+# ['positive', 'positive', 'positive', 'negative', 'positive', 'negative', 'zero']
+
+
+###############################################
+## Example 4: concatenate strings with *args ##
 ###############################################
 
 def create_message(*strings): # now *strings will work as *args to collect all positional arguments
