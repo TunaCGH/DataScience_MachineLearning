@@ -102,6 +102,26 @@ print(posix_path.exists()) # False
                       PRECAUTION
 pathlib.Path("") will return current working directory "."
 '''
+Path("")
+#PosixPath('.')
+
+print(Path(""))
+# .
+
+for entry in Path("").glob("*"):
+    print(entry.name)
+# 01_Python_Basic
+# 02_Python_class_OOP
+# Calculus_ConvexOptimization
+# download_youtube_commandline.sh
+# merge_mp4.sh
+# Python_Important_packages.txt
+# Unrar_file.txt
+# vscode_install_settings.txt
+# .git
+# .gitignore
+# .vscode
+
 
 #####################################
 ## Using .joinpath() to join paths ##
@@ -229,6 +249,42 @@ print(file_parent.parent)
 dir_parent = demo_dir_path.parent
 print(dir_parent)  # /home/longdpt/Documents/Academic/DataScience_MachineLearning
 print(dir_parent.parent)  # /home/longdpt/Documents/Academic/
+
+
+'''
+               BE CAREFUL parent_1
+The pathlib.Path().parent DOES NOT return a string !!!!!!
+'''
+print(type(demo_file_path.parent)) # <class 'pathlib.PosixPath'>
+print(type(file_parent.parent)) # <class 'pathlib.PosixPath'>
+
+
+'''
+             BE CAREFUL parent_2
+If the path has only the destination file name or directory name.
+Its parent will be the CURRENT DIRECTORY "."
+'''
+no_parent_file = Path("file.txt")
+print(no_parent_file.parent) # .
+print(type(no_parent_file.parent)) # <class 'pathlib.PosixPath'>
+
+no_parent_dir = Path("dir")
+print(no_parent_dir.parent) # .
+print(type(no_parent_dir.parent)) # <class 'pathlib.PosixPath'>
+
+for entry in no_parent_file.parent.glob("*"):
+    print(entry.name)
+# 01_Python_Basic
+# 02_Python_class_OOP
+# Calculus_ConvexOptimization
+# download_youtube_commandline.sh
+# merge_mp4.sh
+# Python_Important_packages.txt
+# Unrar_file.txt
+# vscode_install_settings.txt
+# .git
+# .gitignore
+# .vscode
 
 
 #########################
