@@ -6,6 +6,10 @@ from termcolor import colored
 import multiprocessing
 
 # Add file sink while keeping the default console output
+logger_path = Path("02_Python_class_OOP/rectangle_project/rectangle_logs.txt")
+if logger_path.exists():
+    logger_path.unlink()
+
 logger.add("02_Python_class_OOP/rectangle_project/rectangle_logs.txt", 
            rotation="1 MB",  # Rotate when file reaches 1MB
            retention="10 days",  # Keep logs for 10 days
@@ -46,10 +50,10 @@ class RectangleCalculator:
             case _:
                 self.output = Path(self.output)
                 if (self.output.suffix != ""):
-                    self.output = self.output.stem.mkdir(parents = True, exist_ok = True)
+                    self.output = Path(self.output.parent, self.output.stem).mkdir(exist_ok = True)
                     logger.warning(f"Your output path should be a directory, not a file, automatically set as {self.output}")
                 else:
-                    self.output.mkdir()
+                    self.output.mkdir(exist_ok = True)
 
     
     @staticmethod
@@ -157,8 +161,8 @@ class RectangleCalculator:
 def main():
     try:
         calculator = RectangleCalculator(
-            input = "02_Python_class_OOP/rectangle_project/data/",
-            output = "02_Python_class_OOP/rectangle_project/result/",
+            #input = "02_Python_class_OOP/rectangle_project/data/",
+            #output = "02_Python_class_OOP/rectangle_project/result",
             length = 2,
             width = 3,
             cores = 4
