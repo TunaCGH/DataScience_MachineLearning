@@ -1,5 +1,14 @@
+#########################
+## Single-line print() ##
+#########################
+
 print("Hello world!")
 print('Hello world!')
+
+
+######################################
+## Multiple-line print() [METHOD 1] ##
+######################################
 
 print('''
 Immanuel Kant's Principle of Universalizability:
@@ -10,6 +19,24 @@ This principle states that before acting, you should consider whether the rule g
 If the action cannot be universalized without causing a contradiction or harm, then it is immoral.
 ''')
 
+
+######################################
+## Multiple-line print() [METHOD 2] ##
+######################################
+
+print(
+    (
+        "This is the first line."
+        "\nThis is the second line."
+        "\nThis is the third line."
+    )
+)
+
+
+##########################
+## print() with "end =" ##
+##########################
+ 
 print("Happiness is simple", end = ".")
 
 
@@ -85,4 +112,14 @@ cprint(
     color = "black",
     on_color = (1,95,64),
     attrs = ['bold']
+)
+
+
+#############################################################
+## Combine colored() with Multiple-line print() [METHOD 2] ##
+#############################################################
+
+print(
+    colored("In brightest day, in blackest night, no evil shall escape my sight.", "green", attrs = ["bold"]),
+    colored("\nLet those who worship evil's might, beware my power, Green Lantern's light.", "green", attrs = ["bold"])
 )
