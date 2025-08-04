@@ -29,52 +29,54 @@ class RectangleCalculator:
         width: the width of the rectangle (for inplace calculating)
         cores: the number of CPU cores using for parallel computing
         '''
-        self.input = input
-        self.output = output
+        self._input = input
+        self._output = output
         self.__length = length
         self.__width = width
-        self.cores = cores
+        self.length = None
+        self.width = None
+        self._cores = cores
         self._single_output_path = None
 
 
-    def __validate_output_directory(self):
-        match str(self.output):
+    def __validate_output_directory(self): # Internal use only, cannot call out when the module is being imported
+        match str(self._output):
             case "":
                 pass
             case _:
-                if (Path(self.output).suffix != ""):
-                    self.output = Path(self.output)
-                    self.output = self.output.parent / self.output.stem # Create a new path without the suffix
-                    logger.warning(f"You have passed inputs from multiple files, so the ouput path should be a directory, automatically set as {self.output}")
+                if (Path(self._output).suffix != ""):
+                    self._output = Path(self._output)
+                    self._output = self._output.parent / self._output.stem # Create a new path without the suffix
+                    logger.warning(f"You have passed inputs from multiple files, so the ouput path should be a directory, automatically set as {self._output}")
                 
                 else:
-                    self.output = Path(self.output)
+                    self._output = Path(self._output)
                 
-                non_json_count = sum([1 for entry in self.output.rglob("*[!.json]")]) # Ensure the directory contains only json file
-                if (self.output.is_dir()) and (non_json_count == 0):
-                    shutil.rmtree(self.output)
+                non_json_count = sum([1 for entry in self._output.rglob("*[!.json]")]) # Ensure the directory contains only json file
+                if (self._output.is_dir()) and (non_json_count == 0):
+                    shutil.rmtree(self._output)
                 
-                self.output.mkdir(exist_ok = True, parents = True)
+                self._output.mkdir(exist_ok = True, parents = True)
         
-        return self.output
+        return self._output
 
 
-    def __validate_output_file(self, json_output_file):
+    def __validate_output_file(self, json_output_file): # Internal use only, cannot call out when the module is being imported
         if str(json_output_file) == "":
             return None
         
-        elif (str(self.input) != "") and (Path(self.input).is_dir()):
-            json_output_file = Path(self.output).joinpath(json_output_file)
+        elif (str(self._input) != "") and (Path(self._input).is_dir()):
+            json_output_file = Path(self._output).joinpath(json_output_file)
 
-        elif str(self.output) == "":
+        elif str(self._output) == "":
             return None
         
-        elif not Path(self.output).parent.is_dir():
-            Path(self.output).parent.mkdir(parents = True, exist_ok = True)
-            json_output_file = Path(self.output).parent.joinpath(Path(self.output).name)
+        elif not Path(self._output).parent.is_dir():
+            Path(self._output).parent.mkdir(parents = True, exist_ok = True)
+            json_output_file = Path(self._output).parent.joinpath(Path(self._output).name)
         
         else:
-            json_output_file = Path(self.output)
+            json_output_file = Path(self._output)
         
         
         if json_output_file.suffix == "":
@@ -108,11 +110,11 @@ class RectangleCalculator:
         return numbers
 
 
-    def load_rectangle_inputs(self, json_rectangle_file):
+    def __load_rectangle_inputs(self, json_rectangle_file): # Internal use only, cannot call out when the module is being imported
         if len(Path(json_rectangle_file).parts) > 1:
             json_file_path = json_rectangle_file
         else:
-            json_file_path = self.input.joinpath(json_rectangle_file)
+            json_file_path = self._input.joinpath(json_rectangle_file)
         
         with open(json_file_path, "r") as json_pointer:
             length, width = json.load(json_pointer).values()
@@ -126,7 +128,10 @@ class RectangleCalculator:
 
     @property
     def perimeter(self):
-        self.length, self.width = self.__valiate_input_number(self.length, self.width)
+        if None in [self.length, self.width]:
+            self.length, self.width = self.__valiate_input_number(self.__length, self.__width)
+        else:
+            self.length, self.width = self.__valiate_input_number(self.length, self.width)
         
         if None in [self.length, self.width]:
             self.__perimeter = None
@@ -138,7 +143,10 @@ class RectangleCalculator:
 
     @property
     def area(self):
-        self.length, self.width = self.__valiate_input_number(self.length, self.width)
+        if None in [self.length, self.width]:
+            self.length, self.width = self.__valiate_input_number(self.__length, self.__width)
+        else:
+            self.length, self.width = self.__valiate_input_number(self.length, self.width)
         
         if None in [self.length, self.width]:
             self.__area = None
@@ -148,7 +156,7 @@ class RectangleCalculator:
         return self.__area
 
     
-    def save_output_file(self):
+    def __save_output_file(self):
         result_dict = {
             "length": self.length,
             "width": self.width,
@@ -165,7 +173,7 @@ class RectangleCalculator:
     
     def summary(self, rectangle_output_name = "nameless"):
         
-        match str(self.output):
+        match str(self._output):
             case "":
 
                 rectangle_output_name = colored(str(rectangle_output_name), "magenta", attrs=["bold"])
@@ -181,35 +189,35 @@ class RectangleCalculator:
                     f"{area_result}\n"
                 )    
                 
-                if (str(self.input) == "")  and (None in [self.__perimeter, self.__area]):
+                if (str(self._input) == "")  and (None in [self.__perimeter, self.__area]):
                     logger.critical("The given inputs are CORRUPTED! They are expected to be POSITIVE NUMBERS (greater than zero)")
                 else:
                     logger.info(out_message)
             
             case _:
-                self.save_output_file(rectangle_output_name)
+                self.__save_output_file()
 
 
     def _single_workflow(self, json_rectangle_file):
         if json_rectangle_file != '':
-            self.length, self.width = self.load_rectangle_inputs(json_rectangle_file)
+            self.length, self.width = self.__load_rectangle_inputs(json_rectangle_file)
 
-            if Path(self.input).is_dir():
+            if Path(self._input).is_dir():
                 self._single_output_path = self.__validate_output_file(json_rectangle_file)
             else:
-                self._single_output_path = self.__validate_output_file(self.output)
+                self._single_output_path = self.__validate_output_file(self._output)
             
             if (None not in [self.__length, self.__width]):
                 logger.warning(f"Detected valid inputs in {json_rectangle_file}, prioritize them for calculation.")
 
         elif None in [self.__length, self.__width]:
             logger.critical("No valid inputs were given")
-            self.output = ""
+            self._output = ""
             return None
         
         else:
             self.length, self.width = self.__length, self.__width
-            self._single_output_path = self.__validate_output_file(self.output)
+            self._single_output_path = self.__validate_output_file(self._output)
 
         if self._single_output_path is None:
             self.summary()
@@ -222,7 +230,7 @@ class RectangleCalculator:
 #------------------------------------------ Define log_file() function --------------------------------------#
 #------------------------------------------------------------------------------------------------------------#
 
-def config_log_file(project_dir):
+def __config_log_file(project_dir): # Internal use only, cannot call out when the module is being imported
     logger_path = Path(project_dir).joinpath("rectangle_logs.txt")
     if logger_path.exists():
         logger_path.unlink() # Delete the rectangle_logs.txt of the previous run if existed
@@ -241,30 +249,30 @@ def main():
     try:
         calculator = RectangleCalculator(
             input = "02_Python_class_OOP/rectangle_project/data",
-            output = "02_Python_class_OOP/rectangle_project/result",
+            #output = "02_Python_class_OOP/rectangle_project/result",
             #length = 15,
             #width = 3.5,
             cores = 4
         )
 
-        if (calculator.input != "") and Path(calculator.input).exists():
-            calculator.input = Path(calculator.input)
+        if (calculator._input != "") and Path(calculator._input).exists():
+            calculator._input = Path(calculator._input)
 
-            if calculator.input.suffix == ".json":
-                calculator._single_workflow(calculator.input)
-                match str(calculator.output):
+            if calculator._input.suffix == ".json":
+                calculator._single_workflow(calculator._input)
+                match str(calculator._output):
                     case "":
                         pass
                     case _:
                         logger.info(f"The result is saved in {calculator._single_output_path}")
 
             
-            elif (calculator.input.is_dir()):
-                input_files = [(entry.name,) for entry in calculator.input.glob("*.json")]
+            elif (calculator._input.is_dir()):
+                input_files = [(entry.name,) for entry in calculator._input.glob("*.json")]
                 
-                calculator.output = calculator._RectangleCalculator__validate_output_directory()
+                calculator._output = calculator._RectangleCalculator__validate_output_directory()
 
-                match str(calculator.output):
+                match str(calculator._output):
                     case "":
                         logger.warning(
                             (   
@@ -277,27 +285,27 @@ def main():
                         
                         if answer.lower() == "y":
 
-                            with multiprocessing.Pool(processes = calculator.cores) as pool:
+                            with multiprocessing.Pool(processes = calculator._cores) as pool:
                                 pool.starmap(func = calculator._single_workflow, iterable = input_files)
                         else:
                             return None # stop the program
                         
                     case _:
-                        config_log_file(calculator.input.parent) # Only produce rectangle_logs.txt if the input and output directories or files are given           
+                        __config_log_file(calculator._input.parent) # Only produce rectangle_logs.txt if the input and output directories or files are given           
                         
-                        with multiprocessing.Pool(processes = calculator.cores) as pool:
+                        with multiprocessing.Pool(processes = calculator._cores) as pool:
                              pool.starmap(func = calculator._single_workflow, iterable = input_files)
-                        # for entry in calculator.input.glob("*.json"):
+                        # for entry in calculator._input.glob("*.json"):
                         #     calculator._single_workflow(entry.name)
                         
-                        logger.info(f"All result files are saved in {calculator.output}")
+                        logger.info(f"All result files are saved in {calculator._output}")
 
             else:
                 logger.error("There are multiple input files, but the output directory path was not correctly specified")                          
 
         else:
             calculator._single_workflow('')
-            match str(calculator.output):
+            match str(calculator._output):
                 case "":
                     pass
                 case _:
