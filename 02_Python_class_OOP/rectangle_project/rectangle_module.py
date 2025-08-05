@@ -324,23 +324,23 @@ def __parse_args():
 
 def main():
     try:
-        calculator = RectangleCalculator(
-            length = '23',
-            width = "55",
-            input = "02_Python_class_OOP/",
-            #output = "02_Python_class_OOP/rectangle_project/result_single.txt",
-            cores = 4
-        )
-
-        # args = __parse_args()
-
         # calculator = RectangleCalculator(
-        #     length = args.length,
-        #     width = args.width,
-        #     input = args.input,
-        #     output = args.output,
-        #     cores = args.cores
+        #     length = '23',
+        #     width = "55",
+        #     input = "02_Python_class_OOP/",
+        #     output = "02_Python_class_OOP/rectangle_project/result_single.txt",
+        #     cores = 4
         # )
+
+        args = __parse_args()
+
+        calculator = RectangleCalculator(
+            length = args.length,
+            width = args.width,
+            input = args.input,
+            output = args.output,
+            cores = args.cores
+        )
 
         if (calculator._input != "") and (Path(calculator._input).is_dir()):
             calculator._input = Path(calculator._input)
