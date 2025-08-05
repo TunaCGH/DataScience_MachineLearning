@@ -108,10 +108,10 @@ print(df_testing_cases)
 # │ both_valid   ┆ dir_many_json ┆ not_json_file   │   python rectangle_module.py -w 23 -l 55 -i ./data -o ./result_test.txt
 # │ both_valid   ┆ dir_one_json  ┆ not_given       │   python rectangle_module.py -w 23 -l 55 -i ./data_single/
 # │ both_valid   ┆ dir_one_json  ┆ non_existed_dir │   python rectangle_module.py -w 23 -l 55 -i ./data_single/ -o ./result_test
-# │ both_valid   ┆ dir_one_json  ┆ existed_dir     │
-# │ both_valid   ┆ dir_one_json  ┆ json_file       │
-# │ both_valid   ┆ dir_one_json  ┆ not_json_file   │
-# │ both_valid   ┆ dir_no_json   ┆ not_given       │
+# │ both_valid   ┆ dir_one_json  ┆ existed_dir     │   python rectangle_module.py -w 23 -l 55 -i ./data_single/ -o ./result_test
+# │ both_valid   ┆ dir_one_json  ┆ json_file       │   python rectangle_module.py -w 23 -l 55 -i ./data_single/ -o ./result_test.json
+# │ both_valid   ┆ dir_one_json  ┆ not_json_file   │   python rectangle_module.py -w 23 -l 55 -i ./data_single/ -o ./result_test.txt
+# │ both_valid   ┆ dir_no_json   ┆ not_given       │   python rectangle_module.py -w 23 -l 55 -i ../
 # │ both_valid   ┆ dir_no_json   ┆ non_existed_dir │
 # │ both_valid   ┆ dir_no_json   ┆ existed_dir     │
 # │ both_valid   ┆ dir_no_json   ┆ json_file       │

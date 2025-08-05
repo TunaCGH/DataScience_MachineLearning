@@ -205,7 +205,7 @@ class RectangleCalculator:
             length, width = self.length, self.width
         
         else:
-            length, width = self.__length, self.__width
+            length, width = [self.__length, self.__width]
         
         match str(self._output):
             case "":
@@ -260,9 +260,9 @@ class RectangleCalculator:
                 self._single_output_path = self.__validate_output_file(self._output)
         
         else:
-            self.length, self.width = RectangleCalculator.__valiate_input_number(self.__length, self.__width)
-        
-            if None in [self.length, self.width]: # Check if the given inputs from -l and -w are valid
+            self.__length, self.__width = RectangleCalculator.__valiate_input_number(self.__length, self.__width)
+            
+            if (None in [self.__length, self.__width]) and (None in [self.length, self.width]): # Check if the given inputs from -l and -w are valid
                 logger.critical("NO valid inputs were given! They are expected to be POSITIVE NUMBERS (greater than zero)\n")
                 self._output = "" # To avoid displaying the log "The result is saved in None"
                 return None
@@ -324,23 +324,23 @@ def __parse_args():
 
 def main():
     try:
-        # calculator = RectangleCalculator(
-        #     length = '23',
-        #     width = "55",
-        #     input = "02_Python_class_OOP/rectangle_project/data_single/",
-        #     output = "02_Python_class_OOP/rectangle_project/result_single.txt",
-        #     cores = 4
-        # )
-
-        args = __parse_args()
-
         calculator = RectangleCalculator(
-            length = args.length,
-            width = args.width,
-            input = args.input,
-            output = args.output,
-            cores = args.cores
+            length = '23',
+            width = "55",
+            input = "02_Python_class_OOP/",
+            #output = "02_Python_class_OOP/rectangle_project/result_single.txt",
+            cores = 4
         )
+
+        # args = __parse_args()
+
+        # calculator = RectangleCalculator(
+        #     length = args.length,
+        #     width = args.width,
+        #     input = args.input,
+        #     output = args.output,
+        #     cores = args.cores
+        # )
 
         if (calculator._input != "") and (Path(calculator._input).is_dir()):
             calculator._input = Path(calculator._input)
