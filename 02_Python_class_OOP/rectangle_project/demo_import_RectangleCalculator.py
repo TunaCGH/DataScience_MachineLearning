@@ -6,14 +6,16 @@ os.chdir("/home/longdpt/Documents/Academic/DataScience_MachineLearning/02_Python
 from rectangle_module import RectangleCalculator
 
 
-#---------------------------------------------------------------------------------------------------------------------#
-#----------------------------------------- CANON way to use an imported class ----------------------------------------#
-#---------------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------- [RECOMMENDED] Canon way to use an imported class ----------------------------------------#
+#-----------------------------------------------------------------------------------------------------------------------------------#
 
 # Initialize an object belonging to the RectangleCalculator module with given attributes (length and width)
 rectangle = RectangleCalculator(length = 355, width = 263)
 
 # Display information
+print(rectangle.length) # 355
+print(rectangle.width) # 263
 print(rectangle.perimeter) # 1236.0
 print(rectangle.area) # 93365.0
 
@@ -23,6 +25,25 @@ print(rectangle.summary())
 # ++ Width = 263
 # ++ Perimeter = 2 * (355 + 263) = 1236.0
 # ++ Area = 355 * 263 = 93365.0
+
+
+######################################################################
+## Change the attributes (length and width) of the rectangle object ##
+## which will automatically update the perimeter and area as well   ##
+######################################################################
+
+rectangle.length = 55
+rectangle.width = 23
+
+print(rectangle.perimeter) # 156.0
+print(rectangle.area) # 1265.0
+
+print(rectangle.summary())
+# Result of the nameless rectangle:
+# ++ Length = 55
+# ++ Width = 23
+# ++ Perimeter = 2 * (55 + 23) = 156.0
+# ++ Area = 55 * 23 = 1265.0
 
 
 ###################################################################
@@ -54,6 +75,7 @@ This will prevent users from changing the perimeter and area directly, keep the 
 and ensure that the perimeter and area are always calculated based on the length and width.
 '''
 
+
 ###############################################################################################
 ## (NOT RECOMMENDED) Access the private attributes self.__perimeter and self.__area directly ##
 ###############################################################################################
@@ -65,6 +87,9 @@ old_area = rectangle.area
 
 rectangle._RectangleCalculator__perimeter = 289
 rectangle._RectangleCalculator__area = 600
+
+print(f"Length: {rectangle.length}") # 355
+print(f"Width: {rectangle.width}") # 263
 
 print(f"Old perimeter: {old_perimeter}") # 1236.0
 print(f"New perimeter: {rectangle._RectangleCalculator__perimeter}") # 289.0
@@ -84,8 +109,11 @@ Instead, they are set directly, which can lead to inconsistencies and non-integr
 #----------------------------------------- non-canon way to use an imported class ----------------------------------------#
 #-------------------------------------------------------------------------------------------------------------------------#
 
-# Initialize an empty object belonging to the RectangleCalculator module
-rectangle = RectangleCalculator()
+############################################################################
+## Initialize an empty object belonging to the RectangleCalculator module ##
+############################################################################
+
+rectangle = RectangleCalculator() # No attributes are defined
 
 print(rectangle.length) # None
 print(rectangle.width) # None
@@ -97,9 +125,9 @@ print(rectangle.summary())
 # | CRITICAL | rectangle_module:summary:234 - NO valid inputs were given! They are expected to be POSITIVE NUMBERS (greater than zero)
 
 
-############################################
-## Update attributes (.length and .width) ##
-############################################
+####################################################
+## Update attributes (self.length and self.width) ##
+####################################################
 
 rectangle.length = 33
 rectangle.width = 25.5
@@ -111,37 +139,11 @@ print(rectangle.perimeter) # None
 print(rectangle.area) # None
 
 print(rectangle.summary())
-# | CRITICAL | rectangle_module:summary:234 - NO valid inputs were given! They are expected to be POSITIVE NUMBERS (greater than zero)
-
-'''
-Even though the length and width are updated, the perimeter and area are still None.
-
-That is because when the class RectangleCalculator is being imported from another script,
-the inputs for self.area and self.perimetr are taken from self.__length and self.__width
-
-(See the below for solutions)
-'''
-
-################################################
-## Update attributes (.__length and .__width) ##
-################################################
-
-rectangle._RectangleCalculator__length = 33
-rectangle._RectangleCalculator__width = 25.5
-
-print(rectangle._RectangleCalculator__length) # 33
-print(rectangle._RectangleCalculator__width) # 25.5
-
-print(rectangle.perimeter) # 117.0
-print(rectangle.area) # 841.5
-
-print(rectangle.summary())
 # Result of the nameless rectangle:
 # ++ Length = 33
 # ++ Width = 25.5
 # ++ Perimeter = 2 * (33 + 25.5) = 117.0
 # ++ Area = 33 * 25.5 = 841.5
-
 
 #---------------------------------------------------------------------------------------------------------------------------#
 #--------------------------- Display everything of the RectangleCalculator (attributes and methods) ------------------------#
