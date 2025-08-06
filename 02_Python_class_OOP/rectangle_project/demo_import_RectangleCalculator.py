@@ -43,6 +43,43 @@ except Exception as e:
     logger.error(e) 
     # | ERROR    | __main__:<module>:4 - property 'area' of 'RectangleCalculator' object has no setter
 
+'''
+Here, the codes return errors because the perimeter and area are properties of the RectangleCalculator class,
+(a method that is defined with the @property decorator, works like an attribute but is actually a method).
+
+The true corresponding attributes are self.__perimeter and self.__area, which are private attributes of the class.
+So, they cannot be accessed directly from outside the class.
+
+This will prevent users from changing the perimeter and area directly, keep the integrity of the class, 
+and ensure that the perimeter and area are always calculated based on the length and width.
+'''
+
+###############################################################################################
+## (NOT RECOMMENDED) Access the private attributes self.__perimeter and self.__area directly ##
+###############################################################################################
+
+rectangle = RectangleCalculator(length = 355, width = 263)
+
+old_perimeter = rectangle.perimeter
+old_area = rectangle.area
+
+rectangle._RectangleCalculator__perimeter = 289
+rectangle._RectangleCalculator__area = 600
+
+print(f"Old perimeter: {old_perimeter}") # 1236.0
+print(f"New perimeter: {rectangle._RectangleCalculator__perimeter}") # 289.0
+
+print(f"Old area: {old_area}") # 93365.0
+print(f"New area: {rectangle._RectangleCalculator__area}") # 600.0
+
+'''
+This is NOT recommended because it breaks the encapsulation principle of OOP.
+
+The new perimeter and area values are not calculated based on the length and width anymore.
+Instead, they are set directly, which can lead to inconsistencies and non-integrity.
+'''
+
+
 #-------------------------------------------------------------------------------------------------------------------------#
 #----------------------------------------- non-canon way to use an imported class ----------------------------------------#
 #-------------------------------------------------------------------------------------------------------------------------#
