@@ -217,7 +217,7 @@ class RectangleCalculator:
                 area_result = colored(f"++ Area = {length} * {width} = {self.area}", "cyan", attrs=["bold"])
 
                 out_message = (
-                    f"\n\nResult of the {rectangle_output_name} rectangle:\n"
+                    f"\n\nResult of the {rectangle_output_name} {colored("rectangle:", "white", attrs=["bold"])}\n"
                     f"++ Length = {length}\n"
                     f"++ Width = {width}\n"
                     f"{perimeter_result}\n"

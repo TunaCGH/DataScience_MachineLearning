@@ -1,220 +1,40 @@
-2025-08-05 16:26:52.742 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_121.json, prioritize them for calculation.
-2025-08-05 16:26:52.742 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_1.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_122.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.583 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_122.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_10.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_123.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_100.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_101.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_124.json, prioritize them for calculation.
-2025-08-05 16:26:52.743 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_102.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_125.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_103.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_126.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_104.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_105.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_127.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_106.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_128.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_107.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_129.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_108.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_13.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.584 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_13.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_109.json, prioritize them for calculation.
-2025-08-05 16:26:52.744 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_130.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_131.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_11.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_110.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_132.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_111.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_112.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_133.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.584 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_133.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_113.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_134.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_114.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_135.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_115.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_136.json, prioritize them for calculation.
-2025-08-05 16:26:52.745 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_116.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.585 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_139.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_137.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_117.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.585 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_140.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_138.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_118.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_139.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.585 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_116.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_119.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_14.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_12.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_140.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.586 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_117.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_120.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_141.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_142.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_143.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_144.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_145.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_167.json, prioritize them for calculation.
-2025-08-05 16:26:52.746 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_146.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.586 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_146.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_147.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_168.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_148.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_169.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_149.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_17.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_15.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_170.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_150.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_171.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_151.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_172.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_152.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_173.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_153.json, prioritize them for calculation.
-2025-08-05 16:26:52.747 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_174.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_154.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.586 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_154.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_175.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_155.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_176.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_156.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_177.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_157.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_178.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_158.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_179.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_159.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_18.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_16.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_180.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.587 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_164.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_160.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_181.json, prioritize them for calculation.
-2025-08-05 16:26:52.748 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_161.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_182.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_162.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_183.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_163.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_184.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_164.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.587 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_180.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_185.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_165.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_186.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_166.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_187.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_188.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_19.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_189.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_190.json, prioritize them for calculation.
-2025-08-05 16:26:52.749 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_191.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_31.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_192.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_32.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.588 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_198.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_193.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_33.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_194.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_34.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_195.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_35.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_196.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_36.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_197.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_37.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_198.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.589 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_32.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_38.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_199.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_39.json, prioritize them for calculation.
-2025-08-05 16:26:52.750 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_2.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_4.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_20.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_40.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_200.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_41.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_42.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.590 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_42.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_21.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_43.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.590 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_43.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_22.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_44.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_23.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_45.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_24.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_25.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_46.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_26.json, prioritize them for calculation.
-2025-08-05 16:26:52.751 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_47.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_27.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_48.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_28.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_49.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_29.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_5.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_3.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_50.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_30.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_51.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_52.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_54.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_53.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_55.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_56.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_77.json, prioritize them for calculation.
-2025-08-05 16:26:52.752 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_57.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.590 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_57.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.752 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_78.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_58.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_79.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_59.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_8.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_6.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_60.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_80.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_61.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_81.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_62.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_82.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_63.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_83.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_64.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_84.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.591 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_84.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_65.json, prioritize them for calculation.
-2025-08-05 16:26:52.753 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_85.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_66.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_86.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_87.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.592 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_87.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_88.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_89.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.592 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_89.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_9.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_90.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | ERROR    | __main__:__load_rectangle_inputs:133 - CORRUPTED inputs are detected in rectangle_91.json! They are expected to be POSITIVE NUMBERS (greater than zero)
+2025-08-06 10:24:13.593 | ERROR    | __main__:__load_rectangle_inputs:135 - CORRUPTED inputs are detected in [1m[33mrectangle_91.json[0m[1m[31m! They are expected to be POSITIVE NUMBERS (greater than zero)[0m
 
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_92.json, prioritize them for calculation.
-2025-08-05 16:26:52.754 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_93.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_67.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_68.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_69.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_7.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_70.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_71.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_72.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_73.json, prioritize them for calculation.
-2025-08-05 16:26:52.755 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_94.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_74.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_95.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_75.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_96.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_76.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_97.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_98.json, prioritize them for calculation.
-2025-08-05 16:26:52.756 | WARNING  | __main__:summary:227 - Detected valid inputs in result_test/rectangle_99.json, prioritize them for calculation.

@@ -131,22 +131,22 @@ print(df_testing_cases)
 # │ both_valid   ┆ not_existed   ┆ existed_dir     │   python rectangle_module.py -w 23 -l 55 -i ./abcxyz -o ./result_test
 # │ both_valid   ┆ not_existed   ┆ json_file       │   python rectangle_module.py -w 23 -l 55 -i ./abcxyz -o ./result_test.json
 # │ both_valid   ┆ not_existed   ┆ not_json_file   │   python rectangle_module.py -w 23 -l 55 -i ./abcxyz -o ./result_test.txt
-# │ both_invalid ┆ not_given     ┆ not_given       │
-# │ both_invalid ┆ not_given     ┆ non_existed_dir │
-# │ both_invalid ┆ not_given     ┆ existed_dir     │
-# │ both_invalid ┆ not_given     ┆ json_file       │
-# │ both_invalid ┆ not_given     ┆ not_json_file   │
-# │ both_invalid ┆ dir_many_json ┆ not_given       │
-# │ both_invalid ┆ dir_many_json ┆ non_existed_dir │
-# │ both_invalid ┆ dir_many_json ┆ existed_dir     │
-# │ both_invalid ┆ dir_many_json ┆ json_file       │
-# │ both_invalid ┆ dir_many_json ┆ not_json_file   │
-# │ both_invalid ┆ dir_one_json  ┆ not_given       │
-# │ both_invalid ┆ dir_one_json  ┆ non_existed_dir │
-# │ both_invalid ┆ dir_one_json  ┆ existed_dir     │
-# │ both_invalid ┆ dir_one_json  ┆ json_file       │
-# │ both_invalid ┆ dir_one_json  ┆ not_json_file   │
-# │ both_invalid ┆ dir_no_json   ┆ not_given       │
+# │ both_invalid ┆ not_given     ┆ not_given       │   python rectangle_module.py -l a -w b
+# │ both_invalid ┆ not_given     ┆ non_existed_dir │   python rectangle_module.py -l a -w b -o ./result_test
+# │ both_invalid ┆ not_given     ┆ existed_dir     │   python rectangle_module.py -l a -w b -o ./data_single
+# │ both_invalid ┆ not_given     ┆ json_file       │   python rectangle_module.py -l a -w b -o ./result_test.json
+# │ both_invalid ┆ not_given     ┆ not_json_file   │   python rectangle_module.py -l a -w b -o ./result_test.txt
+# │ both_invalid ┆ dir_many_json ┆ not_given       │   python rectangle_module.py -l a -w b -i ./data
+# │ both_invalid ┆ dir_many_json ┆ non_existed_dir │   python rectangle_module.py -l a -w b -i ./data -o ./result_test
+# │ both_invalid ┆ dir_many_json ┆ existed_dir     │   python rectangle_module.py -l a -w b -i ./data -o ./result_test
+# │ both_invalid ┆ dir_many_json ┆ json_file       │   python rectangle_module.py -l a -w b -i ./data -o ./result_test.json
+# │ both_invalid ┆ dir_many_json ┆ not_json_file   │   python rectangle_module.py -l a -w b -i ./data -o ./result_test.txt
+# │ both_invalid ┆ dir_one_json  ┆ not_given       │   python rectangle_module.py -l a -w b -i ./data_single
+# │ both_invalid ┆ dir_one_json  ┆ non_existed_dir │   python rectangle_module.py -l a -w b -i ./data_single -o ./result_test
+# │ both_invalid ┆ dir_one_json  ┆ existed_dir     │   python rectangle_module.py -l a -w b -i ./data_single -o ./result_test
+# │ both_invalid ┆ dir_one_json  ┆ json_file       │   python rectangle_module.py -l a -w b -i ./data_single -o ./result_test.json
+# │ both_invalid ┆ dir_one_json  ┆ not_json_file   │   python rectangle_module.py -l a -w b -i ./data_single -o ./result_test.txt
+# │ both_invalid ┆ dir_no_json   ┆ not_given       │   
 # │ both_invalid ┆ dir_no_json   ┆ non_existed_dir │
 # │ both_invalid ┆ dir_no_json   ┆ existed_dir     │
 # │ both_invalid ┆ dir_no_json   ┆ json_file       │
