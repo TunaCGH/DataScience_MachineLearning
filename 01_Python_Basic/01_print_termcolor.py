@@ -31,6 +31,9 @@ print(
         "\nThis is the third line."
     )
 )
+# This is the first line.
+# This is the second line.
+# This is the third line.
 
 
 ##########################
@@ -38,6 +41,22 @@ print(
 ##########################
  
 print("Happiness is simple", end = ".")
+# Happiness is simple.>>>
+
+print("Happiness is simple", end = " .\n")
+# Happiness is simple .
+# >>> 
+
+
+##########################
+## print() with "sep =" ##
+##########################
+
+print("Happiness", "is", "simple", sep = " - ")
+# Happiness - is - simple
+
+print("Happiness", "is", "simple", sep = "|")
+# Happiness|is|simple
 
 
 #------------------------------------------------------------------------------------------------------#
