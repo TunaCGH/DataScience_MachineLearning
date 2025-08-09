@@ -105,9 +105,11 @@ glob patterns:
 - 'subdir/*.txt' matches all .txt files in the 'subdir' directory
 - 'subdir/**/*.txt' matches all .txt files in the 'subdir' directory (for glob() only, not rglob())
 - [a-z] matches any single character in the range a-z
-- [!a-z] matches any single character not in the range a-z
 - [0-9] matches any single digit from 0 to 9
 - [1-9][0-9] matches any two-digit number from 10 to 99
+- [a-e|t-z] matches any character between a-c or between t-z
+- [!a-z] matches any single character not in the range a-z
+- *[!.py|!.txt] matches any files whose extension is not ".py" or ".txt"
 '''
 ###############
 ## Basic use ##
@@ -167,6 +169,7 @@ for entry in Path.cwd().joinpath("01_Python_Basic").glob("*[!.py]"):  # Exclude 
 # Exercises
 # demo_package
 
+
 # The elements that do not start with '0', '1', '2' or '3:
 for entry in Path.cwd().joinpath("01_Python_Basic").glob("[!0-3]*"):  # Exclude all files starting with '0' or '1'
     print(entry.name)
@@ -220,6 +223,19 @@ for entry in Path.cwd().joinpath("01_Python_Basic").glob("*.py"): # Glob for all
 # 01_print_termcolor.py
 
 
+#################################
+## Count the number of matches ##
+#################################
+
+# Count the number of python files in the 01_Python_Basic using normal glob("*.py")
+py_count = sum(1 for _ in Path.cwd().joinpath("01_Python_Basic").glob("*.py")) # Use "_" as a looping factor to complete the for loop syntax, but not needed later
+print(py_count) # 46
+
+# Count the number of non-python files in the current directory using recursive glob("**/*[!.py]")
+non_py_count = sum(1 for _ in Path.cwd().glob("**/*[!.py]"))
+print(non_py_count) # 1926
+
+
 #-------------------------------------------------------------------------------------------------------------#
 #------------------------------------- 3. path_object.rglob() ------------------------------------------------#
 #-------------------------------------------------------------------------------------------------------------#
@@ -268,6 +284,79 @@ for entry in Path.cwd().rglob("*.py"):
 # 09_OOP_principles.py
 
 
+#################################
+## Exclusive rglob() using "!" ##
+#################################
+
+# The non-python elements:
+for entry in Path.cwd().joinpath("01_Python_Basic").rglob("*[!.py|!.json]"):  # Exclude all .py and .json files
+    print(entry.name)
+# demo_data
+# demo_package
+# drinks.csv
+# weather.tsv
+# write_dictionary.csv
+# write_list.csv
+# write_quoting_all.csv
+# write_quoting_non_numeric.csv
+# write_tsv.tsv
+# medals.csv
+# ADream.txt
+# Customers.txt
+# HumptyDumpty.txt
+# JohnnyJohnny.txt
+# Rain.txt
+# StudentScores.txt
+# food.xml
+# music_cd.xml
+# new_written_starwars.xml
+# plant_catalog.xml
+
+
+# The elements that do not start with '0', '1', '2' or '3 and not a json file:
+for entry in Path.cwd().joinpath("01_Python_Basic").rglob("[!0-3]*[!.json]"):  # Exclude all files starting with '0' or '1'
+    print(entry.name)
+# 40_multi_threading.py
+# 41_multi_processing.py
+# demo_data
+# demo_module_same_directory.py
+# demo_package
+# 43_logging.py
+# 44_loguru_logger.py
+# 42_ArgumentParser_MainFunction.py
+# 45_Debugging_demonstration.py
+# Exercise_session_03_Birthday_StudentClassify.py
+# Exercise_session_04_List_practice.py
+# Exercise_session_05_Tuple_Set_Frozenset.py
+# Exercise_session_06_Dictionary_UnpackingOperators.py
+# Exercise_session_07_TXT_CSV_TSV.py
+# Exercise_session_08_JSON_XML.py
+# Exercise_session_01_calculate_circumference_area.py
+# Exercise_session_02_StringMethods_RegularExpression.py
+# Exercise_session_09_os_shutil.py
+# package_module_2.py
+# __init__.py
+# package_module_1.py
+# drinks.csv
+# weather.tsv
+# write_dictionary.csv
+# write_list.csv
+# write_quoting_all.csv
+# write_quoting_non_numeric.csv
+# write_tsv.tsv
+# medals.csv
+# ADream.txt
+# Customers.txt
+# HumptyDumpty.txt
+# JohnnyJohnny.txt
+# Rain.txt
+# StudentScores.txt
+# food.xml
+# music_cd.xml
+# new_written_starwars.xml
+# plant_catalog.xml
+
+
 ############################################
 ## filter results with regular expression ##
 ############################################
@@ -296,6 +385,18 @@ for entry in Path.cwd().rglob("*.py"):
 # 02_Convex_Optimization_CVXPY/13_OptimizationStandardForm_LocalOptimal_ImplicitConstraints.py
 # 02_Convex_Optimization_CVXPY/14_CvxOpt_StandardForm_LocalGlobalOptima.py
 
+
+#################################
+## Count the number of matches ##
+#################################
+
+# Count the number of python files in the current directory using rglob("*.py")
+py_count = sum(1 for _ in Path.cwd().rglob("*.py")) # Use "_" as a looping factor to complete the for loop syntax, but not needed later
+print(py_count) # 202
+
+# Count the number of non-python and non-json files in the current directory using rglob("*[!.py|!.json]")
+non_py_json_count = sum(1 for _ in Path.cwd().rglob("*[!.py|!.json]"))
+print(non_py_json_count) # 1502
 
 #--------------------------------------------------------------------------------------------------------------#
 #------------------------------------- 4. path_object.walk() --------------------------------------------------#
