@@ -9,9 +9,10 @@ Or like numpy 1D array with additional features like labels.
 Flow of contents
 1. Creating a Series: from a list, dictionary, ndarray or scalar value; with indexing.
 2. Accessing elements: using index labels or positions.
-3. Some import Series attributes
-4. Vectorized Operations: arithmetic operations, statistical methods, and more.
-5. Name attributes: setting and getting the name of the Series.
+3. Dtype
+4. Some import Series attributes
+5. Vectorized Operations: arithmetic operations, statistical methods, and more.
+6. Name attributes: setting and getting the name of the Series.
 '''
 
 import pandas as pd
