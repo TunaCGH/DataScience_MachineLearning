@@ -21,6 +21,14 @@ Comparsion returns  True or False
 '''
 
 '''
+Chain (Between) Comparisons
+a < b < c
+a <= b < c
+a < b <= c
+a <= b <= c
+'''
+
+'''
 a += b is equivalent to a = a+b
 a *= b is equivalent to a = a*b
 '''
