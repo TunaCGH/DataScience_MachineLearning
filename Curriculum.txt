@@ -33,7 +33,13 @@
 + OOP principles
 + Rectangle Project
 
-3. DataFrame - Pandas - DataR
+3. NumPy and JaxNumPy for vector and matrix handling
++ vector (1-D array) handling with NumPy (or JaxNumPy)
++ matrix (2-D array) handling with NumPy (or JaxNumPy)
+
+4. Univariate Math functions with JaxNumPy - NumPy, Random
+
+5. DataFrame - Pandas - DataR
 + Pandas datatype
 + Pandas I/O: CSV, XLSX, ...
 + Pandas subset columns and rows
@@ -46,13 +52,7 @@
 + Pandas simple plot
 + DataR: handle DataFrame with R's dplyr and tidyverse style
 
-4. Polars: like Pandas but faster
-
-5. NumPy and JaxNumPy for vector and matrix handling
-+ vector (1-D array) handling with NumPy (or JaxNumPy)
-+ matrix (2-D array) handling with NumPy (or JaxNumPy)
-
-6. Univariate Math functions with JaxNumPy - NumPy, Random
+6. Polars: like Pandas but faster
 
 7. Datavisualization with Matplotlib, Seaborn, Plotnine and Plotly
 + Matplotlib: scatter plot, line plot, boxplot, ...
