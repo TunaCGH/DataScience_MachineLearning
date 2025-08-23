@@ -52,7 +52,7 @@
 + Pandas simple plot
 + DataR: handle DataFrame with R's dplyr and tidyverse style
 
-6. Polars: like Pandas but faster
+6. Polars - Tidypolars4sci: like Pandas but faster
 
 7. Datavisualization with Matplotlib, Seaborn, Plotnine and Plotly
 + Matplotlib: scatter plot, line plot, boxplot, ...
