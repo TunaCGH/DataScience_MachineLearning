@@ -95,56 +95,116 @@ Note: missing values like NaN or None are not included in the categories by defa
 By default, the ordered=False, meaning categories are unordered.
 '''
 
+'''
+NOTE: THIS WILL NOT CREATE A pd.Series OBJECT, IT CREATES A pd.Categorical OBJECT.
+=> MUST WRAP IT IN A pd.Series() TO GET A CATEGORICAL SERIES.
+'''
+
 #---------------------------
 ## string gender example
 #---------------------------
 
-s_gender = pd.Series(["M", "M", "F", "M", "LGBTQ", "F", "M", "F", "LGBTQ", "M"])
+lst_gender = ["M", "M", "F", "M", "LGBTQ", "F", "M", "F", "LGBTQ", "M"]
 
 ## With ordered = False
-s_gender_categ = pd.Categorical(s_gender, ordered = False)
+s_gender_categ = pd.Series(pd.Categorical(lst_gender, ordered = False))
 print(s_gender_categ)
-# ['M', 'M', 'F', 'M', 'LGBTQ', 'F', 'M', 'F', 'LGBTQ', 'M']
-# Categories (3, object): ['LGBTQ', 'F', 'M']
+# 0        M
+# 1        M
+# 2        F
+# 3        M
+# 4    LGBTQ
+# 5        F
+# 6        M
+# 7        F
+# 8    LGBTQ
+# 9        M
+# dtype: category
+# Categories (3, object): ['F', 'LGBTQ', 'M']
 
 
 ## With ordered = True
-s_gender_categ = pd.Categorical(
-    values = s_gender,
+s_gender_categ = pd.Series(pd.Categorical(
+    values = lst_gender,
     categories = ["LGBTQ", "F", "M"],  # Specify the order of categories
     ordered = True  # Set to True if you want to treat categories as ordered
-)
+))
 print(s_gender_categ)
-# ['M', 'M', 'F', 'M', 'LGBTQ', 'F', 'M', 'F', 'LGBTQ', 'M']
+# 0        M
+# 1        M
+# 2        F
+# 3        M
+# 4    LGBTQ
+# 5        F
+# 6        M
+# 7        F
+# 8    LGBTQ
+# 9        M
+# dtype: category
 # Categories (3, object): ['LGBTQ' < 'F' < 'M']
-
 
 #---------------------------
 ## numeric example with NaN
 #---------------------------
 
-s_price_levels = pd.Series([1, 1, 3, 2, 5, 2, None, 4, 4, np.nan, 3])
+lst_price_levels = [1, 1, 3, 2, 5, 2, None, 4, 4, np.nan, 3]
 
 ## With ordered = False
-s_price_levels_categ = pd.Categorical(s_price_levels, ordered = False)
+s_price_levels_categ = pd.Series(pd.Categorical(lst_price_levels, ordered = False))
 print(s_price_levels_categ)
-# Length: 11
-# Categories (5, float64): [1.0, 2.0, 3.0, 4.0, 5.0]
+# 0       1
+# 1       1
+# 2       3
+# 3       2
+# 4       5
+# 5       2
+# 6     NaN
+# 7       4
+# 8       4
+# 9     NaN
+# 10      3
+# dtype: category
+# Categories (5, int64): [1, 2, 3, 4, 5]
 '''Here, the NaN and None values are not included in the categories.'''
 
 
 ## With ordered = True
-s_price_levels_categ = pd.Categorical(
-    values = s_price_levels,
+s_price_levels_categ = pd.Series(pd.Categorical(
+    values = lst_price_levels,
     categories = [1, 2, 3, 4, 5], # Define the level
     ordered = True  # Set to True if you want to treat categories as ordered
-)
+))
 print(s_price_levels_categ)
-# [1, 1, 3, 2, 5, ..., NaN, 4, 4, NaN, 3]
-# Length: 11
+# 0       1
+# 1       1
+# 2       3
+# 3       2
+# 4       5
+# 5       2
+# 6     NaN
+# 7       4
+# 8       4
+# 9     NaN
+# 10      3
+# dtype: category
 # Categories (5, int64): [1 < 2 < 3 < 4 < 5]
 
 
 #---------------------------------------------------------------------------------------------------------------#
 #------------------------------------------ 1. Core attributes -------------------------------------------------#
 #---------------------------------------------------------------------------------------------------------------#
+
+s_gender = pd.Categorical(["M", "M", "F", "M", "LGBTQ", "F", "M", "F", "LGBTQ", "M"])
+
+s_levels = pd.Categorical(
+    values = [1, 1, 3, 2, 5, 2, None, 4, 4, np.nan, 3],
+    categories = [1, 2, 3, 4, 5],
+    ordered = True
+)
+
+#####################
+## .cat.categories ##
+#####################
+# Returns the categories of the categorical Series.
+
+print(s_gender.cat.categories)
