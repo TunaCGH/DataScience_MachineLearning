@@ -194,12 +194,14 @@ print(s_price_levels_categ)
 #------------------------------------------ 1. Core attributes -------------------------------------------------#
 #---------------------------------------------------------------------------------------------------------------#
 
-s_gender = pd.Categorical(["M", "M", "F", "M", "LGBTQ", "F", "M", "F", "LGBTQ", "M"])
+s_gender = pd.Series(["M", "M", "F", "M", "LGBTQ", "F", "M", "F", "LGBTQ", "M"], dtype = 'category')
 
-s_levels = pd.Categorical(
-    values = [1, 1, 3, 2, 5, 2, None, 4, 4, np.nan, 3],
-    categories = [1, 2, 3, 4, 5],
-    ordered = True
+s_levels = pd.Series(
+    pd.Categorical(
+        values = [1, 1, 3, 2, 5, 2, None, 4, 4, np.nan, 3],
+        categories = [1, 2, 3, 4, 5],
+        ordered = True
+    )
 )
 
 #####################
@@ -208,3 +210,52 @@ s_levels = pd.Categorical(
 # Returns the categories of the categorical Series.
 
 print(s_gender.cat.categories)
+# Index(['F', 'LGBTQ', 'M'], dtype='object')
+
+print(s_levels.cat.categories)
+# Index([1, 2, 3, 4, 5], dtype='int64')
+
+
+################
+## .cat.codes ##
+################
+# Returns the category codes as a Series of integers.
+
+print(s_gender.cat.codes)
+# 0    2 ('M' is the 2nd index in .cat.categories)
+# 1    2
+# 2    0 ('F' is the 0th index in .cat.categories)
+# 3    2
+# 4    1 ('LGBTQ' is the 1st index in .cat.categories)
+# 5    0
+# 6    2
+# 7    0
+# 8    1
+# 9    2
+# dtype: int8
+
+print(s_levels.cat.codes)
+# 0     0
+# 1     0
+# 2     2 ('3' is the 2nd index in .cat.categories)
+# 3     1
+# 4     4
+# 5     1
+# 6    -1 (None is invalid => is represented as -1)
+# 7     3
+# 8     3
+# 9    -1 (np.nan is invalid => is represented as -1)
+# 10    2
+# dtype: int8
+
+
+##################
+## .cat.ordered ##
+##################
+# Returns True if the categories have an order, False otherwise
+
+print(s_gender.cat.ordered)
+# False
+
+print(s_levels.cat.ordered)
+# True
