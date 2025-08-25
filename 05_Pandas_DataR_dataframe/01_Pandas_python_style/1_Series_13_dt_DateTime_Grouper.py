@@ -5,10 +5,10 @@ that provides access to datetime-like properties and methods for pandas Series.
 Supported Types: datetime64[ns], datetime64[ns, tz], Period, timedelta[ns]
 
 Flow of contents:
-0. Creating a Series with datetime data:
+0. Creating datetime data and index:
     + Datetime data: pd.to_datetime(), astype('datetime64[ns]'), pd.date_range(), pd.bdate_range()
     + Timedelta data: pd.to_timedelta(), astype('timedelta64[ns]'), pd.timedelta_range()
-    + Period: pd.period(), .Series.to_period(), pd.period_range(), 
+    + Period: pd.Period(), .Series.to_period(), pd.period_range(), 
     + pd.infer_freq(): Infers the frequency of a DatetimeIndex
 
 1. Basic properties:
@@ -97,7 +97,7 @@ import pandas as pd
 import numpy as np
 
 #-------------------------------------------------------------------------------------------------------------#
-#---------------------------------- 0. Creating a Series with datetime data ----------------------------------#
+#------------------------------------ 0. Creating datetime data and index ------------------------------------#
 #-------------------------------------------------------------------------------------------------------------#
 '''
 0. Creating a Series with datetime data:
@@ -187,7 +187,6 @@ print(s_daterange)
 # 2023-01-10    87
 # Freq: D, dtype: int64
 
-
 ######################
 ## pd.bdate_range() ##
 ######################
@@ -239,3 +238,135 @@ print(s_timedelta)
 '''
 Only specify "unit=" when the input is NUMERIC (not string or object).
 '''
+
+###############################
+## astype('timedelta64[ns]') ##
+###############################
+
+s_timedelta = s_original.astype('timedelta64[ns]')
+print(s_timedelta)
+# 0   1 days 00:00:00
+# 1   2 days 03:00:00
+# 2   4 days 05:30:00
+# dtype: timedelta64[ns]
+
+s_timedelta = s_original_nums.astype('timedelta64[ns]') # Interpreted as nanoseconds
+print(s_timedelta)
+# 0   0 days 00:00:00.000000001
+# 1   0 days 00:00:00.000000002
+# 2   0 days 00:00:00.000000004
+# dtype: timedelta64[ns]
+
+s_timedelta = s_original_nums.astype('timedelta64[h]') # Interpreted as hours
+print(s_timedelta)
+# 0   0 days 01:00:00
+# 1   0 days 02:00:00
+# 2   0 days 04:00:00
+# dtype: timedelta64[s]
+
+##########################
+## pd.timedelta_range() ##
+##########################
+# Create a TimedeltaIndex with a specified frequency
+# Can use this TimedeltaIndex as index for a Series or DataFrame
+# https://pandas.pydata.org/docs/reference/api/pandas.timedelta_range.html
+
+td_range = pd.timedelta_range(start = '1 days', end = '10 days', freq = '2D') # '2D' means every 2 days
+print(td_range)
+# TimedeltaIndex(['1 days', '3 days', '5 days', '7 days', '9 days'], dtype='timedelta64[ns]', freq='2D')
+
+td_range = pd.timedelta_range(start = '1 day', end = '2 days', freq = '6h') # '6h' means every 6 hours
+print(td_range)
+# TimedeltaIndex(['1 days 00:00:00', '1 days 06:00:00', '1 days 12:00:00',
+#                 '1 days 18:00:00', '2 days 00:00:00'],
+#                dtype='timedelta64[ns]', freq='6h')
+
+np.random.seed(0)
+s_timedelta_range = pd.Series(data = np.random.randint(0, 100, size = len(td_range)), index = td_range)
+print(s_timedelta_range)
+# 1 days 00:00:00    44
+# 1 days 06:00:00    47
+# 1 days 12:00:00    64
+# 1 days 18:00:00    67
+# 2 days 00:00:00    67
+# Freq: 6h, dtype: int64
+
+
+'''
+#--------------------------
+## Period data
+#--------------------------
+'''
+
+#################
+## pd.Period() ##
+#################
+# Represents a period of time.
+
+period = pd.Period('2012-1-1', freq='D')
+
+print(period) 
+# 2012-01-01
+
+print(type(period))
+# <class 'pandas._libs.tslibs.period.Period'>
+
+print(period.freq)
+# <Day>
+
+print(period.day)
+# 1
+
+#########################
+## .Series.to_period() ##
+#########################
+# Convert Series from DatetimeIndex to PeriodIndex.
+
+idx = pd.DatetimeIndex(['2023', '2024', '2025'])
+s = pd.Series([1, 2, 3], index=idx)
+s = s.to_period()
+
+print(s)
+# 2023    1
+# 2024    2
+# 2025    3
+# Freq: Y-DEC, dtype: int64
+
+print(s.index)
+# PeriodIndex(['2023', '2024', '2025'], dtype='period[Y-DEC]')
+
+#######################
+## pd.period_range() ##
+#######################
+# Return a fixed frequency PeriodIndex (Can use this as Series or DataFrame index).
+# The day (calendar) is the default frequency.
+
+period_index = pd.period_range(start = '2017-01-01', end = '2018-01-01', freq = 'Q')
+print(period_index)
+# PeriodIndex(['2017Q1', '2017Q2', '2017Q3', '2017Q4', '2018Q1'], dtype='period[Q-DEC]')
+
+np.random.seed(0)
+s_period_range = pd.Series(data = np.random.randint(0, 100, size = len(period_index)), index = period_index)
+print(s_period_range)
+# 2017Q1    44
+# 2017Q2    47
+# 2017Q3    64
+# 2017Q4    67
+# 2018Q1    67
+# Freq: Q-DEC, dtype: int64
+
+
+'''
+#--------------------------
+## Infer the most likely frequency given the input index.
+#--------------------------
+'''
+
+#####################
+## pd.infer_freq() ##
+#####################
+
+idx = pd.date_range(start = '2020/12/01', end = '2020/12/30', periods = 30)
+
+infered_freq = pd.infer_freq(idx)
+print(infered_freq) # D (daily frequency)
