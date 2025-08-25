@@ -99,12 +99,6 @@ import numpy as np
 #-------------------------------------------------------------------------------------------------------------#
 #------------------------------------ 0. Creating datetime data and index ------------------------------------#
 #-------------------------------------------------------------------------------------------------------------#
-'''
-0. Creating a Series with datetime data:
-    + Timedelta data: pd.to_timedelta(), astype('timedelta64[ns]'), pd.timedelta_range()
-    + Period: pd.period(), .Series.to_period(), pd.period_range(), 
-    + pd.infer_freq(): Infers the frequency of a DatetimeIndex
-'''
 
 '''
 #--------------------------
@@ -159,9 +153,9 @@ print(s_datetime)
 #####################
 ## pd.date_range() ##
 #####################
-
 # Create a DatetimeIndex with a specified frequency
 # Can use this DatetimeIndex as index for a Series or DataFrame
+'''Can wrap with pd.Series() to create a Series from this DatetimeIndex object'''
 # https://pandas.pydata.org/docs/reference/api/pandas.date_range.html
 
 # Create a date range from '2023-01-01' to '2023-01-10' with daily frequency
@@ -190,8 +184,8 @@ print(s_daterange)
 ######################
 ## pd.bdate_range() ##
 ######################
-
 # Works like pd.date_range() but only includes business days (Monday to Friday)
+'''Can wrap with pd.Series() to create a Series from this DatetimeIndex object'''
 # https://pandas.pydata.org/docs/reference/api/pandas.bdate_range.html
 
 bdate_range = pd.bdate_range(start = '2023-01-01', end = '2023-01-10', freq = 'B') # 'B' means business day frequency
@@ -269,6 +263,7 @@ print(s_timedelta)
 ##########################
 # Create a TimedeltaIndex with a specified frequency
 # Can use this TimedeltaIndex as index for a Series or DataFrame
+'''Can wrap with pd.Series() to create a Series from this TimedeltaIndex object'''
 # https://pandas.pydata.org/docs/reference/api/pandas.timedelta_range.html
 
 td_range = pd.timedelta_range(start = '1 days', end = '10 days', freq = '2D') # '2D' means every 2 days
@@ -340,6 +335,8 @@ print(s.index)
 #######################
 # Return a fixed frequency PeriodIndex (Can use this as Series or DataFrame index).
 # The day (calendar) is the default frequency.
+'''Can wrap with pd.Series() to create a Series from this PeriodIndex object'''
+# https://pandas.pydata.org/docs/reference/api/pandas.period_range.html#pandas.period_range
 
 period_index = pd.period_range(start = '2017-01-01', end = '2018-01-01', freq = 'Q')
 print(period_index)
@@ -370,3 +367,366 @@ idx = pd.date_range(start = '2020/12/01', end = '2020/12/30', periods = 30)
 
 infered_freq = pd.infer_freq(idx)
 print(infered_freq) # D (daily frequency)
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#------------------------------------------- 1. Basic properties ---------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-01 08:30:15', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-01-01 08:30:15
+# 1   2023-01-02 08:30:15
+# 2   2023-01-03 08:30:15
+# 3   2023-01-04 08:30:15
+# 4   2023-01-05 08:30:15
+# dtype: datetime64[ns]
+
+##################################
+## .dt.year, .dt.month, .dt.day ##
+##################################
+
+print(s_datetime.dt.year)
+# 0    2023
+# 1    2023
+# 2    2023
+# 3    2023
+# 4    2023
+# dtype: int32
+
+print(s_datetime.dt.month)
+# 0    1
+# 1    1
+# 2    1
+# 3    1
+# 4    1
+# dtype: int32
+
+print(s_datetime.dt.day)
+# 0    1
+# 1    2
+# 2    3
+# 3    4
+# 4    5
+# dtype: int32
+
+######################################
+## .dt.hour, .dt.minute, .dt.second ##
+######################################
+
+print(s_datetime.dt.hour)
+# 0    8
+# 1    8
+# 2    8
+# 3    8
+# 4    8
+# dtype: int32
+
+print(s_datetime.dt.minute)
+# 0    30
+# 1    30
+# 2    30
+# 3    30
+# 4    30
+# dtype: int32
+
+print(s_datetime.dt.second)
+# 0    15
+# 1    15
+# 2    15
+# 3    15
+# 4    15
+# dtype: int32
+
+#####################################
+## .dt.microsecond, .dt.nanosecond ##
+#####################################
+
+print(s_datetime.dt.microsecond)
+# 0    0
+# 1    0
+# 2    0
+# 3    0
+# 4    0
+# dtype: int32
+
+print(s_datetime.dt.nanosecond)
+# 0    0
+# 1    0
+# 2    0
+# 3    0
+# 4    0
+# dtype: int32
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#-------------------------------------- 2. ISO Calendar properties -------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-01', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-01-01
+# 1   2023-01-02
+# 2   2023-01-03
+# 3   2023-01-04
+# 4   2023-01-05
+# dtype: datetime64[ns]
+
+#######################
+## .dt.isocalendar() ##
+#######################
+# Returns a DataFrame with ISO components = year + week + day
+
+print(s_datetime.dt.isocalendar())
+#       year     week      day
+#   <UInt32> <UInt32> <UInt32>
+# 0     2022       52        7
+# 1     2023        1        1
+# 2     2023        1        2
+# 3     2023        1        3
+# 4     2023        1        4
+
+############################
+## .dt.isocalendar().year ##
+############################
+
+print(s_datetime.dt.isocalendar().year)
+# 0    2022
+# 1    2023
+# 2    2023
+# 3    2023
+# 4    2023
+# Name: year, dtype: UInt32
+
+############################
+## .dt.isocalendar().week ##
+############################
+
+print(s_datetime.dt.isocalendar().week)
+# 0    52
+# 1     1
+# 2     1
+# 3     1
+# 4     1
+# Name: week, dtype: UInt32
+
+###########################
+## .dt.isocalendar().day ##
+###########################
+
+print(s_datetime.dt.isocalendar().day)
+# 0    7
+# 1    1
+# 2    2
+# 3    3
+# 4    4
+# Name: day, dtype: UInt32
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#--------------------------------------- 3. Extended properties ----------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-03-01', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-03-01
+# 1   2023-03-02
+# 2   2023-03-03
+# 3   2023-03-04
+# 4   2023-03-05
+# dtype: datetime64[ns]
+
+###################
+## .dt.dayofyear ##
+###################
+# The day of the year (1 to 365 or 366 in leap years)
+
+print(s_datetime.dt.dayofyear)
+# 0    60
+# 1    61
+# 2    62
+# 3    63
+# 4    64
+# dtype: int32
+
+################################
+## .dt.dayofweek, .dt.weekday ##
+################################
+# The day of the week with Monday=0, Sunday=6
+
+print(s_datetime.dt.dayofweek)
+# 0    2
+# 1    3
+# 2    4
+# 3    5
+# 4    6
+# dtype: int32
+
+print(s_datetime.dt.weekday)
+# 0    2
+# 1    3
+# 2    4
+# 3    5
+# 4    6
+# dtype: int32
+
+#################
+## .dt.quarter ##
+#################
+# The quarter of the year (1 to 4)
+
+print(s_datetime.dt.quarter)
+# 0    1
+# 1    1
+# 2    1
+# 3    1
+# 4    1
+# dtype: int32
+'''March is in the 1st quarter'''
+
+#######################
+## .dt.days_in_month ##
+#######################
+# The number of days in the month
+
+print(s_datetime.dt.days_in_month)
+# 0    31
+# 1    31
+# 2    31
+# 3    31
+# 4    31
+# dtype: int32
+'''March has 31 days'''
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#---------------------------------------- 4. Boolean properties ----------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+##########################################
+## .dt.is_month_start, .dt.is_month_end ##
+##########################################
+
+s_datetime = pd.Series(pd.date_range(start = '2023-05-01', periods = 7, freq = '5D'))
+print(s_datetime)
+# 0   2023-05-01
+# 1   2023-05-06
+# 2   2023-05-11
+# 3   2023-05-16
+# 4   2023-05-21
+# 5   2023-05-26
+# 6   2023-05-31
+# dtype: datetime64[ns]
+'''
+periods = 7 means creating 7 dates
+freq = '5D' means each date is 5 days apart
+'''
+
+print(s_datetime.dt.is_month_start) # Indicates whether the date is the first day of the month
+# 0     True (2023-05-01 is the first day of May)
+# 1    False
+# 2    False
+# 3    False
+# 4    False
+# 5    False
+# 6    False
+# dtype: bool
+
+print(s_datetime.dt.is_month_end) # Indicates whether the date is the last day of the month
+# 0    False
+# 1    False
+# 2    False
+# 3    False
+# 4    False
+# 5    False
+# 6     True (2023-05-31 is the last day of May)
+# dtype: bool
+
+##############################################
+## .dt.is_quarter_start, .dt.is_quarter_end ##
+##############################################
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-31', end = '2023-06-30', freq = 'ME')) # 'ME' means month end frequency
+first_january = pd.Series(['2023-01-01'], dtype='datetime64[ns]')
+s_datetime = pd.concat([first_january, s_datetime], ignore_index=True)
+print(s_datetime)
+# 0   2023-01-01
+# 1   2023-01-31
+# 2   2023-02-28
+# 3   2023-03-31
+# 4   2023-04-30
+# 5   2023-05-31
+# 6   2023-06-30
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.is_quarter_start) # Indicates whether the date is the first day of the quarter
+# 0     True (2023-01-01 is the first day of the 1st quarter)
+# 1    False
+# 2    False
+# 3    False
+# 4    False
+# 5    False
+# 6    False
+# dtype: bool
+
+print(s_datetime.dt.is_quarter_end) # Indicates whether the date is the last day of the quarter
+# 0    False
+# 1    False
+# 2    False
+# 3     True (2023-03-31 is the last day of the 1st quarter)
+# 4    False
+# 5    False
+# 6     True (2023-06-30 is the last day of the 2nd quarter)
+# dtype: bool 
+
+########################################
+## .dt.is_year_start, .dt.is_year_end ##
+########################################
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-31', end = '2023-12-31', freq = 'QE'))
+first_january = pd.Series(['2023-01-01'], dtype='datetime64[ns]')
+s_datetime = pd.concat([first_january, s_datetime], ignore_index=True)
+print(s_datetime)
+# 0   2023-01-01
+# 1   2023-03-31
+# 2   2023-06-30
+# 3   2023-09-30
+# 4   2023-12-31
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.is_year_start) # Indicates whether the date is the first day of the year
+# 0     True (2023-01-01 is the first day of the year)
+# 1    False
+# 2    False
+# 3    False
+# 4    False
+# dtype: bool
+
+print(s_datetime.dt.is_year_end) # Indicates whether the date is the last day of the year
+# 0    False
+# 1    False
+# 2    False
+# 3    False
+# 4     True (2023-12-31 is the last day of the year)
+# dtype: bool
+
+######################
+## .dt.is_leap_year ##
+######################
+
+s_datetime = pd.Series(pd.date_range(start = '2020-01-01', end = '2024-01-01', freq = 'YS')) # 'YS' means year start frequency
+print(s_datetime)
+# 0   2020-01-01
+# 1   2021-01-01
+# 2   2022-01-01
+# 3   2023-01-01
+# 4   2024-01-01
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.is_leap_year) # Indicates whether the year is a leap year
+# 0     True (2020 is a leap year)
+# 1    False
+# 2    False
+# 3    False
+# 4     True (2024 is a leap year)
+# dtype: bool
