@@ -6,10 +6,9 @@ Supported Types: datetime64[ns], datetime64[ns, tz], Period, timedelta[ns]
 
 Flow of contents:
 0. Creating a Series with datetime data:
-    + Datetime data: pd.to_datetime(), pd.date_range(), astype('datetime64[ns]')
-    + Business Date Range: pd.bdate_range()
-    + Timedelta data: pd.to_timedelta(), pd.timedelta_range(), astype('timedelta64[ns]')
-    + Period: pd.period(), pd.period_range(), .Series.to_period()
+    + Datetime data: pd.to_datetime(), astype('datetime64[ns]'), pd.date_range(), pd.bdate_range()
+    + Timedelta data: pd.to_timedelta(), astype('timedelta64[ns]'), pd.timedelta_range()
+    + Period: pd.period(), .Series.to_period(), pd.period_range(), 
     + pd.infer_freq(): Infers the frequency of a DatetimeIndex
 
 1. Basic properties:
@@ -98,14 +97,3 @@ import pandas as pd
 import numpy as np
 
 
-#-------------------------------------------------------------------------------------------------------------#
-#---------------------------------- 0. Creating a Series with datetime data ----------------------------------#
-#-------------------------------------------------------------------------------------------------------------#
-'''
-0. Creating a Series with datetime data:
-    + Datetime data: pd.to_datetime(), pd.date_range(), astype('datetime64[ns]')
-    + Business Date Range: pd.bdate_range()
-    + Timedelta data: pd.to_timedelta(), pd.timedelta_range(), astype('timedelta64[ns]')
-    + Period: pd.period(), pd.period_range(), .Series.to_period()
-    + pd.infer_freq(): Infers the frequency of a DatetimeIndex
-'''
