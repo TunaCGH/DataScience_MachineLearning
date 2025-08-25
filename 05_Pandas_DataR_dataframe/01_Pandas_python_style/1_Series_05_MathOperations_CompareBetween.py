@@ -3,9 +3,19 @@ Pandas Series also support various vectorized operations similar to NumPy arrays
 These operations can be performed on Series objects, allowing for efficient data manipulation.
 
 Flow of contents:
-1. Mathematical Operations: round(), + add(), - sub(), * mul(), / div(), // floordiv(), % mod(), ** pow()
-2. Logic Boolean Comparisons: < lt(), <= le(), > gt(), >= ge(), == eq(), != ne()
-                             Boolean to Binary 0/1 (using astype(int))
+1. Mathematical Operations: 
+   round(), 
+   + add(), - sub(), 
+   * mul(), / div(), 
+   // floordiv(), % mod(), 
+   ** pow()
+
+2. Logic Boolean Comparisons: 
+   < lt(), <= le(), 
+   > gt(), >= ge(), 
+   between(left, right, inclusive='both'), 
+   == eq(), != ne()
+   Boolean to Binary 0/1 (using astype(int))
 '''
 
 import pandas as pd
@@ -342,6 +352,33 @@ print(s1_str >= s2_str) # s1_str.ge(s2_str)
 # dtype: bool
 
 
+###############
+## between() ##
+###############
+'''
+inclusive = "both" (default): [left, right] or left <= x <= right
+inclusive = "neither": (left, right) or left < x < right
+inclusive = "left": [left, right) or left <= x < right
+inclusive = "right": (left, right] or left < x <= right
+'''
+
+print(s1.between(20, 40))  # Default inclusive='both'
+# 0    False
+# 1    False
+# 2    False
+# 3     True
+# 4    False
+# 5    False
+
+print(s2.between(20, 40, inclusive = 'neither'))
+# 0    False
+# 1    False
+# 2     True
+# 3    False
+# 4    False
+# 5    False
+
+ 
 #############
 ## == eq() ##
 #############
