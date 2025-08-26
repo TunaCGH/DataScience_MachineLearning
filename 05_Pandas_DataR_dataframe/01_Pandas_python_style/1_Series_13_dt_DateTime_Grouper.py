@@ -51,6 +51,7 @@ Flow of contents:
     + .dt.normalize(): Convert times to midnight (00:00:00)
 
 8. Timezone Handling:
+    + pytz.all_timezones: List of all available timezones
     + .dt.tz: Get current timezone information
     + .dt.tz_localize(tz): Assign timezone to naive datetime
     + .dt.tz_convert(tz):  Convert between timezones
@@ -934,3 +935,115 @@ print(s_datetime.dt.normalize())
 # 3   2023-01-04
 # 4   2023-01-05
 # dtype: datetime64[ns]
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#---------------------------------------- 8. Timezone Handling -----------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-01 08:30:15', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-01-01 08:30:15
+# 1   2023-01-02 08:30:15
+# 2   2023-01-03 08:30:15
+# 3   2023-01-04 08:30:15
+# 4   2023-01-05 08:30:15
+# dtype: datetime64[ns]
+
+s_datetime_UTC = pd.Series(pd.date_range(start = '2023-01-01 08:30:15', periods = 5, freq = 'D', tz = 'UTC'))
+print(s_datetime_UTC)
+# 0   2023-01-01 08:30:15+00:00
+# 1   2023-01-02 08:30:15+00:00
+# 2   2023-01-03 08:30:15+00:00
+# 3   2023-01-04 08:30:15+00:00
+# 4   2023-01-05 08:30:15+00:00
+# dtype: datetime64[ns, UTC]
+'''(The +00:00 indicates UTC timezone)'''
+
+s_datetime_HCM = pd.Series(pd.date_range(start = '2023-01-01 08:30:15', periods = 5, freq = 'D', tz = 'Asia/Ho_Chi_Minh'))
+print(s_datetime_HCM)
+# 0   2023-01-01 08:30:15+07:00
+# 1   2023-01-02 08:30:15+07:00
+# 2   2023-01-03 08:30:15+07:00
+# 3   2023-01-04 08:30:15+07:00
+# 4   2023-01-05 08:30:15+07:00
+# dtype: datetime64[ns, Asia/Ho_Chi_Minh]
+'''(The +07:00 indicates Asia/Ho_Chi_Minh timezone)'''
+
+########################
+## pytz.all_timezones ##
+########################
+'''List all available timezones'''
+
+import pytz
+
+print(pytz.all_timezones)
+# ['Africa/Abidjan', 'Africa/Accra', 'Africa/Addis_Ababa', ... 'US/Samoa', 'UTC', 'Universal', 'W-SU', 'WET', 'Zulu']
+
+for tz in pytz.all_timezones: # Print all timezones line by line
+    print(tz)
+# Africa/Abidjan
+# Africa/Accra
+# Africa/Addis_Ababa
+# ...
+# WET
+# Zulu
+
+for tz in pytz.all_timezones: # Print timezones containing 'Asia' line by line
+    if 'Asia' in tz:
+        print(tz)
+# Asia/Aden
+# Asia/Almaty
+# Asia/Amman
+
+############
+## .dt.tz ##
+############
+'''Get current timezone information'''
+
+print(s_datetime.dt.tz)
+# None
+
+print(s_datetime_UTC.dt.tz)
+# UTC
+
+print(s_datetime_HCM.dt.tz)
+# Asia/Ho_Chi_Minh
+
+#######################
+## .dt.tz_localize() ##
+#######################
+'''Set timezone for timezone-naive datetime (i.e., datetime without timezone info)'''
+
+s_localized = s_datetime.dt.tz_localize('US/Samoa')
+print(s_localized)
+# 0   2023-01-01 08:30:15-11:00
+# 1   2023-01-02 08:30:15-11:00
+# 2   2023-01-03 08:30:15-11:00
+# 3   2023-01-04 08:30:15-11:00
+# 4   2023-01-05 08:30:15-11:00
+# dtype: datetime64[ns, US/Samoa]
+'''(The -11:00 indicates US/Samoa timezone)'''
+
+s_localized = s_datetime_HCM.dt.tz_localize('Zulu')
+# This will raise an error because s_datetime_HCM already has timezone info
+'''TypeError: Already tz-aware, use tz_convert to convert.'''
+
+######################
+## .dt.tz_convert() ##
+######################
+'''Convert timezone for timezone-aware datetime (i.e., datetime with timezone info)'''
+
+s_converted = s_datetime_HCM.dt.tz_convert('Asia/Amman')
+print(s_converted)
+# 0   2023-01-01 04:30:15+03:00
+# 1   2023-01-02 04:30:15+03:00
+# 2   2023-01-03 04:30:15+03:00
+# 3   2023-01-04 04:30:15+03:00
+# 4   2023-01-05 04:30:15+03:00
+# dtype: datetime64[ns, Asia/Amman]
+'''(The +03:00 indicates Asia/Amman timezone)'''
+
+s_converted = s_datetime.dt.tz_convert('Zulu')
+# This will raise an error because s_datetime is timezone-naive
+'''TypeError: Cannot convert tz-naive timestamps, use tz_localize to localize'''
