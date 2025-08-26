@@ -781,3 +781,65 @@ print(s_datetime.dt.is_leap_year) # Indicates whether the year is a leap year
 # 3    False
 # 4     True (2024 is a leap year)
 # dtype: bool
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#------------------------------------ 6. String Representation Methods ---------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-01 08:30:15', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-01-01 08:30:15
+# 1   2023-01-02 08:30:15
+# 2   2023-01-03 08:30:15
+# 3   2023-01-04 08:30:15
+# 4   2023-01-05 08:30:15
+# dtype: datetime64[ns]
+
+##########################
+## .dt.strftime(format) ##
+##########################
+# Custom string formatting using strftime codes
+# https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes
+
+print(s_datetime.dt.strftime('%d-%M-%Y %H:%M'))
+# 0    01-30-2023 08:30
+# 1    02-30-2023 08:30
+# 2    03-30-2023 08:30
+# 3    04-30-2023 08:30
+# 4    05-30-2023 08:30
+# dtype: object
+
+print(s_datetime.dt.strftime('%A, %B %d, %Y'))
+# 0       Sunday, January 01, 2023
+# 1       Monday, January 02, 2023
+# 2      Tuesday, January 03, 2023
+# 3    Wednesday, January 04, 2023
+# 4     Thursday, January 05, 2023
+# dtype: object
+
+####################
+## .dt.day_name() ##
+####################
+# Return day names ("Monday", "Tuesday", etc.)
+
+print(s_datetime.dt.day_name())
+# 0       Sunday
+# 1       Monday
+# 2      Tuesday
+# 3    Wednesday
+# 4     Thursday
+# dtype: object
+
+######################
+## .dt.month_name() ##
+######################
+# Return month names ("January", "February", etc.)
+
+print(s_datetime.dt.month_name())
+# 0    January
+# 1    January
+# 2    January
+# 3    January
+# 4    January
+# dtype: object
