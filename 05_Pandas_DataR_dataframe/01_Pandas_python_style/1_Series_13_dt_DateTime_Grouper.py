@@ -1108,3 +1108,75 @@ print(s_timedelta.dt.total_seconds())
 NOTE: since these are all numeric values (int or float), you can perform numeric operations on them directly.
 '''
 
+
+#-------------------------------------------------------------------------------------------------------------#
+#----------------------------------- 10. Grouper with datetime-like data -------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+'''
+A Grouper allows the user to specify a groupby instruction for an object.
+https://pandas.pydata.org/docs/reference/api/pandas.Grouper.html#pandas.Grouper
+'''
+
+day_range = pd.date_range(start = '2023-01-01', end = '2023-01-07', freq = 'D')
+s_price = pd.Series([100, 150, 200, 250, 300, 350, 400], index = day_range)
+print(s_price)
+# 2023-01-01    100
+# 2023-01-02    150
+# 2023-01-03    200
+# 2023-01-04    250
+# 2023-01-05    300
+# 2023-01-06    350
+# 2023-01-07    400
+# Freq: D, dtype: int64
+
+###############################################
+## using pandas methods like pd.Series.sum() ##
+###############################################
+
+# Calculate sum for every 3 days
+sum_3_days = s_price.groupby(pd.Grouper(freq = '3D')).sum()
+
+print(sum_3_days)
+# 2023-01-01    450 (100 + 150 + 200)
+# 2023-01-04    900 (250 + 300 + 350)
+# 2023-01-07    400 (400)
+# Freq: 3D, dtype: int64
+
+##################
+## using .agg() ##
+##################
+
+# Calculate mean for every 2 days
+mean_2_days = s_price.groupby(pd.Grouper(freq = '2D')).agg('mean')
+
+print(mean_2_days)
+# 2023-01-01    125.0 ( (100 + 150) / 2 )
+# 2023-01-03    225.0 ( (200 + 250) / 2 )
+# 2023-01-05    325.0
+# 2023-01-07    400.0
+# Freq: 2D, dtype: float64
+
+##########################################
+##  using external funciton with .agg() ##
+##########################################
+
+# Calculate standard deviation for every 3 days
+std_3_days = s_price.groupby(pd.Grouper(freq = '3D')).agg(np.std)
+
+print(std_3_days)
+# 2023-01-01    50.0 ( std of 100, 150, 200 )
+# 2023-01-04    50.0
+# 2023-01-07     NaN
+# Freq: 3D, dtype: float64
+
+########################################
+##  using lambda funciton with .agg() ##
+########################################
+
+# Calculate max for every 4 days
+max_4_days = s_price.groupby(pd.Grouper(freq = '4D')).agg(lambda x: x.max())
+
+print(max_4_days)
+# 2023-01-01    250 ( max of 100, 150, 200, 250 )
+# 2023-01-05    400 ( max of 300, 350, 400 )
+# Freq: 4D, dtype: int64
