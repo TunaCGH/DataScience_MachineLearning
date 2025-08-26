@@ -799,8 +799,10 @@ print(s_datetime)
 ##########################
 ## .dt.strftime(format) ##
 ##########################
-# Custom string formatting using strftime codes
-# https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes
+'''
+https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes
+'''
+
 
 print(s_datetime.dt.strftime('%d-%M-%Y %H:%M'))
 # 0    01-30-2023 08:30
@@ -821,7 +823,6 @@ print(s_datetime.dt.strftime('%A, %B %d, %Y'))
 ####################
 ## .dt.day_name() ##
 ####################
-# Return day names ("Monday", "Tuesday", etc.)
 
 print(s_datetime.dt.day_name())
 # 0       Sunday
@@ -843,3 +844,93 @@ print(s_datetime.dt.month_name())
 # 3    January
 # 4    January
 # dtype: object
+
+
+#-------------------------------------------------------------------------------------------------------------#
+#-------------------------------------- 7. Time Rounding Methods ---------------------------------------------#
+#-------------------------------------------------------------------------------------------------------------#
+
+s_datetime = pd.Series(pd.date_range(start = '2023-01-01 08:45:23', periods = 5, freq = 'D'))
+print(s_datetime)
+# 0   2023-01-01 08:45:23
+# 1   2023-01-02 08:45:23
+# 2   2023-01-03 08:45:23
+# 3   2023-01-04 08:45:23
+# 4   2023-01-05 08:45:23
+# dtype: datetime64[ns]
+
+#################
+## .dt.round() ##
+#################
+'''Round to nearest specified frequency'''
+
+print(s_datetime.dt.round('h')) # Round to nearest hour
+# 0   2023-01-01 09:00:00 (The nearest hour to 08:45:23 is 09:00:00)
+# 1   2023-01-02 09:00:00
+# 2   2023-01-03 09:00:00
+# 3   2023-01-04 09:00:00
+# 4   2023-01-05 09:00:00
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.round('min')) # Round to nearest minute
+# 0   2023-01-01 08:45:00 (The nearest minute to 08:45:23 is 08:45:00)
+# 1   2023-01-02 08:45:00
+# 2   2023-01-03 08:45:00
+# 3   2023-01-04 08:45:00
+# 4   2023-01-05 08:45:00
+# dtype: datetime64[ns]
+
+#################
+## .dt.floor() ##
+#################
+'''Round down to specified frequency'''
+
+print(s_datetime.dt.floor('h')) # Floor to hour
+# 0   2023-01-01 08:00:00
+# 1   2023-01-02 08:00:00
+# 2   2023-01-03 08:00:00
+# 3   2023-01-04 08:00:00
+# 4   2023-01-05 08:00:00
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.floor('min')) # Floor to minute
+# 0   2023-01-01 08:45:00
+# 1   2023-01-02 08:45:00
+# 2   2023-01-03 08:45:00
+# 3   2023-01-04 08:45:00
+# 4   2023-01-05 08:45:00
+# dtype: datetime64[ns]
+
+################
+## .dt.ceil() ##
+################
+'''Round up to specified frequency'''
+
+print(s_datetime.dt.ceil('h')) # Ceil to hour
+# 0   2023-01-01 09:00:00
+# 1   2023-01-02 09:00:00
+# 2   2023-01-03 09:00:00
+# 3   2023-01-04 09:00:00
+# 4   2023-01-05 09:00:00
+# dtype: datetime64[ns]
+
+print(s_datetime.dt.ceil('min')) # Ceil to minute
+# 0   2023-01-01 08:46:00
+# 1   2023-01-02 08:46:00
+# 2   2023-01-03 08:46:00
+# 3   2023-01-04 08:46:00
+# 4   2023-01-05 08:46:00
+# dtype: datetime64[ns]
+
+#####################
+## .dt.normalize() ##
+#####################
+'''Convert times to midnight (00:00:00), useful when time does not matter'''
+
+print(s_datetime.dt.normalize())
+# 0   2023-01-01
+# 1   2023-01-02
+# 2   2023-01-03
+# 3   2023-01-04
+# 4   2023-01-05
+# dtype: datetime64[ns]
