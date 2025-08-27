@@ -456,7 +456,6 @@ print(s_tzs[s_tzs.str.contains("Kyoto") | s_tzs.str.contains("Tokyo") | s_tzs.st
 # 322    Asia/Tokyo
 # dtype: object
 
-
 ###############################
 ##      Combine & and |      ##
 ###############################
