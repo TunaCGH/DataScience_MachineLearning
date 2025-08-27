@@ -95,3 +95,24 @@ print(df)
 # 1       3.2       4.9
 # 2       5.7       2.3
 # 3       6.8       1.2
+
+##################
+## Advanced way ##
+##################
+
+df_score = pd.DataFrame(
+    data = {
+        "name": ["Alice"]*3 + ["Susan"]*3,
+        "subject": ["Math", "Science", "English"]*2,
+        "score": np.array([85, 90, 88, 92, 95, 89]),
+    }
+)
+
+print(df_score)
+#     name  subject  score
+# 0  Alice     Math     85
+# 1  Alice  Science     90
+# 2  Alice  English     88
+# 3  Susan     Math     92
+# 4  Susan  Science     95
+# 5  Susan  English     89
