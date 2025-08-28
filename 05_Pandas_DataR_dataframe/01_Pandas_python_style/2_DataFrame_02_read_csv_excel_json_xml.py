@@ -21,6 +21,9 @@ Flow of contents:
    + Specify sheet_name=: df = pd.read_excel('path/to/file.xlsx', sheet_name='Sheet_Name'/Sheet_Index)
 
 3. pd.read_json() - Read JSON files
+   + Basic Usage: df = pd.read_json('path/to/file.json')
+   + Normalize json object/dataframe: df = pd.json_normalize(data=json_obj, record_path=['path', 'to', 'list'])
+   
 4. pd.read_xml() - Read XML files
 '''
 
@@ -444,3 +447,93 @@ print(df)
 # 5      Nina   Boston
 # 6     Simon   Mumbai
 # 7      Guru   Dallas
+
+
+#---------------------------------------------------------------------------------------------------------#
+#----------------------------------------- 3. pd.read_json() ---------------------------------------------#
+#---------------------------------------------------------------------------------------------------------#
+
+'''
+read_json() supports multiple JSON orientations and structures, 
+making it versatile for API data and nested records.
+
+Detailed documentation: https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json
+
+"orient" Parameter Options:
++ "records": List of dictionaries format
++ "index": Dictionary with row indices as keys
++ "split": Dictionary with separate index, columns, and data
++ "columns": Dictionary with column names as keys
++ "values": Array of arrays format
+'''
+
+#################
+## Basic Usage ##
+#################
+
+'''
+{ 
+   "ID":["1","2","3","4","5","6","7","8" ],
+   "Name":["Rick","Dan","Michelle","Ryan","Gary","Nina","Simon","Guru" ],
+   "Salary":["623.3","515.2","611","729","843.25","578","632.8","722.5" ],
+   
+   "StartDate":[ "1/1/2012","9/23/2013","11/15/2014","5/11/2014","3/27/2015","5/21/2013",
+      "7/30/2013","6/17/2014"],
+   "Dept":[ "IT","Operations","IT","HR","Finance","IT","Operations","Finance"]
+}
+'''
+
+df = pd.read_json("05_Pandas_DataR_dataframe/01_Pandas_python_style/data/emps.json")
+
+print(df)
+#    ID      Name  Salary   StartDate        Dept
+# 0   1      Rick  623.30    1/1/2012          IT
+# 1   2       Dan  515.20   9/23/2013  Operations
+# 2   3  Michelle  611.00  11/15/2014          IT
+# 3   4      Ryan  729.00   5/11/2014          HR
+# 4   5      Gary  843.25   3/27/2015     Finance
+# 5   6      Nina  578.00   5/21/2013          IT
+# 6   7     Simon  632.80   7/30/2013  Operations
+# 7   8      Guru  722.50   6/17/2014     Finance
+
+#####################################
+## Normalize json object/dataframe ##
+#####################################
+
+df_corrupted = pd.read_json(
+    path_or_buf = "05_Pandas_DataR_dataframe/01_Pandas_python_style/data/books.json",
+)
+
+print(df_corrupted)
+#                                             Mathematics
+# book  [{'title': 'Applied Linear Statistical Models'...
+
+'''Let's normalize this nested JSON into a flat table.'''
+
+df_processed = pd.json_normalize(df_corrupted['Mathematics']['book'])
+
+print(df_processed)
+#                                                title  ...                                attribute
+# 0                  Applied Linear Statistical Models  ...  [Exercises, Illustrations, Readability]
+# 1  Mathematical Proofs: A Transition to Advanced ...  ...                 [Exercises, Readability]
+# 2      Mathematical Statistics with Resampling and R  ...  [Exercises, Illustrations, Readability]
+# [3 rows x 6 columns]
+
+'''Other way'''
+
+import json
+
+with open("05_Pandas_DataR_dataframe/01_Pandas_python_style/data/books.json", "r", encoding="utf-8") as f:
+    json_obj = json.load(f)        # json_obj is a dict, not a DataFrame [1]
+
+df_processed = pd.json_normalize(
+    data=json_obj, 
+    record_path=["Mathematics", "book"]   # list of dicts to rows [10]
+)
+
+print(df_processed)
+#                                                title  ...                                attribute
+# 0                  Applied Linear Statistical Models  ...  [Exercises, Illustrations, Readability]
+# 1  Mathematical Proofs: A Transition to Advanced ...  ...                 [Exercises, Readability]
+# 2      Mathematical Statistics with Resampling and R  ...  [Exercises, Illustrations, Readability]
+# [3 rows x 6 columns]
