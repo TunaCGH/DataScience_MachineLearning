@@ -17,14 +17,16 @@ Flow of contents:
    + Read with skipfooter=: df = pd.read_csv('path/to/file.csv', skipfooter=2, engine='python')
 
 2. pd.read_excel() - Read Excel files
+   + Installation: conda install -c conda-forge openpyxl / pip3 install openpyxl
    + Basic Usage: df = pd.read_excel('path/to/file.xlsx')
    + Specify sheet_name=: df = pd.read_excel('path/to/file.xlsx', sheet_name='Sheet_Name'/Sheet_Index)
 
 3. pd.read_json() - Read JSON files
    + Basic Usage: df = pd.read_json('path/to/file.json')
    + Normalize json object/dataframe: df = pd.json_normalize(data=json_obj, record_path=['path', 'to', 'list'])
-   
+
 4. pd.read_xml() - Read XML files
+   + Installation: conda install -c conda-forge lxml / pip3 install lxml
 '''
 
 import pandas as pd
@@ -537,3 +539,48 @@ print(df_processed)
 # 1  Mathematical Proofs: A Transition to Advanced ...  ...                 [Exercises, Readability]
 # 2      Mathematical Statistics with Resampling and R  ...  [Exercises, Illustrations, Readability]
 # [3 rows x 6 columns]
+
+
+#---------------------------------------------------------------------------------------------------------#
+#----------------------------------------- 4. pd.read_xml() ----------------------------------------------#
+#---------------------------------------------------------------------------------------------------------#
+
+'''
+read_xml() handles XML documents with XPath expressions and namespace support.
+
+Core Parameters
++ xpath: XPath expression for node selection (default: './*')
++ namespaces: Namespace dictionary for complex XML
++ parser: XML parser ('lxml', 'etree')
++ attrs_only/elems_only: Parse only attributes or elements
+'''
+
+# conda install -c conda-forge lxml
+# pip3 install lxml
+
+###############
+## Example 1 ##
+###############
+
+df_cd = pd.read_xml("05_Pandas_DataR_dataframe/01_Pandas_python_style/data/cd.xml")
+
+print(df_cd)
+#                        TITLE             ARTIST COUNTRY         COMPANY  PRICE  YEAR
+# 0           Empire Burlesque          Bob Dylan     USA        Columbia   10.9  1985
+# 1            Hide your heart       Bonnie Tyler      UK     CBS Records    9.9  1988
+# 2              Greatest Hits       Dolly Parton     USA             RCA    9.9  1982
+# 3        Still got the blues         Gary Moore      UK  Virgin records   10.2  1990
+# 4                       Eros    Eros Ramazzotti      EU             BMG    9.9  1997
+# 5             One night only           Bee Gees      UK         Polydor   10.9  1998
+# 6             Sylvias Mother            Dr.Hook      UK             CBS    8.1  1973
+# 7                 Maggie May        Rod Stewart      UK        Pickwick    8.5  1990
+# 8                    Romanza     Andrea Bocelli      EU         Polydor   10.8  1996
+# 9   When a man loves a woman       Percy Sledge     USA        Atlantic    8.7  1987
+
+###############
+## Example 2 ##
+###############
+
+df_food = pd.read_xml("05_Pandas_DataR_dataframe/01_Pandas_python_style/data/food.xml")
+
+print(df_food)
