@@ -459,6 +459,10 @@ print(df_wtl.head(10))
 #---------------------------------------------------------------------------------------------------------#
 #---------------------------------------------- 3. Cross-Table -------------------------------------------#
 #---------------------------------------------------------------------------------------------------------#
+'''
+A cross-tabulation (or cross-tab) is a table that displays the frequency distribution of variables.
+It is used to analyze the relationship between two or more categorical variables (Chi-squared test).
+'''
 
 ##############################
 ## Create example DataFrame ##
@@ -488,3 +492,141 @@ df_survey.head()
 # 2              3  Female            Red           Never
 # 3              4  Female          Green           Never
 # 4              5    Male           Blue        Unlikely
+
+################################
+##        pd.crosstab()       ##
+################################
+
+#----------
+## Basic usage
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey['gender'], # Values to group by in the rows.
+    columns = df_survey['favorite_color'], # Values to group by in the columns.
+    dropna = False # Keep NaN columns
+)
+
+print(contigency_table)
+# favorite_color  Blue  Green  Purple  Red  Yellow
+# gender                                          
+# Female            24     19      31   21      26
+# Male              35     15      25   23      21
+# Other              1      4       2    3       0
+
+#----------
+## With margins=True
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey['gender'], 
+    columns = df_survey['favorite_color'], 
+    margins = True, # Add row and column totals (named "All")
+    dropna = False 
+)
+
+print(contigency_table)
+# favorite_color  Blue  Green  Purple  Red  Yellow  All
+# gender                                               
+# Female            24     19      31   21      26  121
+# Male              35     15      25   23      21  119
+# Other              1      4       2    3       0   10
+# All               60     38      58   47      47  250
+
+#----------
+## With normalize='index'
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey["gender"], 
+    columns = df_survey["purchase_intent"],
+    normalize = 'index', # Normalize by row (index)
+    dropna = False
+)
+
+print(contigency_table)
+# purchase_intent  Definitely     Maybe     Never  Probably  Unlikely
+# gender                                                             
+# Female             0.190083  0.289256  0.132231  0.239669  0.148760
+# Male               0.134454  0.319328  0.109244  0.252101  0.184874
+# Other              0.100000  0.300000  0.100000  0.500000  0.000000
+'''Normalize to percentages within rows(index), so that each row sums to 1.'''
+
+#----------
+## With normalize='columns'
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey["gender"], 
+    columns = df_survey["purchase_intent"],
+    normalize = 'columns', # Normalize by columns
+    dropna = False
+)
+
+print(contigency_table)
+# purchase_intent  Definitely     Maybe     Never  Probably  Unlikely
+# gender                                                             
+# Female                0.575  0.460526  0.533333  0.453125      0.45
+# Male                  0.400  0.500000  0.433333  0.468750      0.55
+# Other                 0.025  0.039474  0.033333  0.078125      0.00
+'''Normalize to percentages within columns, so that each column sums to 1.'''
+
+#----------
+## With normalize='all'
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey["gender"], 
+    columns = df_survey["purchase_intent"],
+    normalize = 'all', # Normalize by all values
+    dropna = False
+)
+
+print(contigency_table)
+# purchase_intent  Definitely  Maybe  Never  Probably  Unlikely
+# gender                                                       
+# Female                0.092  0.140  0.064     0.116     0.072
+# Male                  0.064  0.152  0.052     0.120     0.088
+# Other                 0.004  0.012  0.004     0.020     0.000
+'''Normalize to percentages of the total, so that the entire table sums to 1.'''
+
+#----------
+## With multiple columns=
+#----------
+
+contigency_table = pd.crosstab(
+    index = df_survey["gender"], 
+    columns = [df_survey["favorite_color"], df_survey["purchase_intent"]],
+    dropna = False
+)
+
+print(contigency_table)
+# favorite_color        Blue                                    Green        ...      Red              Yellow                              
+# purchase_intent Definitely Maybe Never Probably Unlikely Definitely Maybe  ... Probably Unlikely Definitely Maybe Never Probably Unlikely
+# gender                                                                     ...                                                           
+# Female                   7     7     1        4        5          2     7  ...        4        4          6     8     4        8        0
+# Male                     3    10     4       12        6          0     4  ...        4        5          3     9     3        1        5
+# Other                    0     0     1        0        0          1     2  ...        2        0          0     0     0        0        0
+
+######
+
+contigency_table = (
+    pd.crosstab(
+        index   = df_survey["gender"],
+        columns = [df_survey["favorite_color"], df_survey["purchase_intent"]],
+        dropna  = False
+    )
+    .pipe(
+        lambda df: df.set_axis(
+            df.columns.map(lambda tup_col: "_".join(tup_col)), # Join multi-level columns with "_"
+            axis=1
+        )
+    )
+)
+
+print(contigency_table)
+#         Blue_Definitely  Blue_Maybe  Blue_Never  Blue_Probably  ...  Yellow_Maybe  Yellow_Never  Yellow_Probably  Yellow_Unlikely
+# gender                                                          ...                                                              
+# Female                7           7           1              4  ...             8             4                8                0
+# Male                  3          10           4             12  ...             9             3                1                5
+# Other                 0           0           1              0  ...             0             0                0                0
