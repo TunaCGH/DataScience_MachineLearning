@@ -307,3 +307,50 @@ print(df_set_id.loc[df_set_id["name"].str.startswith("R"), ["name", "salary", "d
 # id                   
 # 1   Rick   623.3   IT
 # 4   Ryan   729.0   HR
+
+
+#--------------------------------------------------------------------------------------------------------------#
+#------------------------------------- 3. Indexing with df.iat and df.iloc ------------------------------------#
+#--------------------------------------------------------------------------------------------------------------#
+
+##################
+##    df.iat    ##
+##################
+'''Access a SINGLE value for a row/column pair by INTEGER position'''
+
+print(df_emp.iat[2, 1])
+# Michelle
+
+print(df_indexed.iat[4, 4])
+# Finance
+
+#################
+##   df.iloc   ##
+#################
+'''Access a MULTIPLE rows and columns by INTEGER position(s).
+NOTE: The end_row is EXCLUDED when using df.iloc
+'''
+
+print(df_emp.iloc[2:5])
+#    id      name  salary  start_date     dept
+# 2   3  Michelle  611.00  2014-11-15       IT
+# 3   4      Ryan  729.00  2014-05-11       HR
+# 4   5      Gary  843.25  2015-03-27  Finance
+
+print(df_emp.iloc[:, [1, 4]]) # All rows and specific columns
+#        name        dept
+# 0      Rick          IT
+# 1       Dan  Operations
+# 2  Michelle          IT
+# 3      Ryan          HR
+# 4      Gary     Finance
+# 5      Nina          IT
+# 6     Simon  Operations
+# 7      Guru     Finance
+
+print(df_set_id.iloc[2:5, 2]) # Single column
+# id
+# 3    2014-11-15
+# 4    2014-05-11
+# 5    2015-03-27
+# Name: start_date, dtype: object
