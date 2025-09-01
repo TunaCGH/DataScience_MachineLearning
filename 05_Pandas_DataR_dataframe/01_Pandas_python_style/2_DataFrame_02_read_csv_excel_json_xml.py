@@ -10,6 +10,7 @@ Flow of contents:
    + Specify index_col=: df = pd.read_csv('path/to/file.csv', index_col='column_name'/column_index)
    + Specify usecols=: df = pd.read_csv('path/to/file.csv', usecols=['col1', 'col2']/col_index_list)
    + Specify dtype=: df = pd.read_csv('path/to/file.csv', dtype={'col1': 'str', 'col2': 'float64'})
+   + Specify parse_dates=: df = pd.read_csv('path/to/file.csv', parse_dates=['date_col']/True)
    + With header= and names=: df = pd.read_csv('path/to/file.csv', header=0, names=['col1', 'col2'])
    + Read TSV file with sep='\t': df = pd.read_csv('path/to/file.tsv', sep='\t')
    + Handle NA values: df = pd.read_csv('path/to/file.csv', na_values=['?'])
@@ -150,7 +151,7 @@ print(df)
 
 df = pd.read_csv(
     filepath_or_buffer = '05_Pandas_DataR_dataframe/data/emp.csv', 
-    usecols=['name', 'salary', 'dept'],
+    usecols=['name', 'salary', 'dept', 'start_date'],
     dtype = {
         'name': 'str', # If set as 'string', it will be "string[python]", not "object"
         'salary': 'float64',
@@ -158,22 +159,66 @@ df = pd.read_csv(
     }
 )
 
-print(df)
-#        name  salary        dept
-# 0      Rick  623.30          IT
-# 1       Dan  515.20  Operations
-# 2  Michelle  611.00          IT
-# 3      Ryan  729.00          HR
-# 4      Gary  843.25     Finance
-# 5      Nina  578.00          IT
-# 6     Simon  632.80  Operations
-# 7      Guru  722.50     Finance
+print(df.dtypes)
+# name            object
+# salary         float64
+# start_date      object
+# dept          category
+# dtype: object
+
+##########################
+## Specify parse_dates= ##
+##########################
+
+#-----------
+## parse_dates = ['col1', 'col2'] or 'col1'
+#-----------
+
+df = pd.read_csv(
+    filepath_or_buffer = '05_Pandas_DataR_dataframe/data/emp.csv', 
+    dtype = {
+        'name': 'str', # If set as 'string', it will be "string[python]", not "object"
+        'salary': 'float64',
+        'dept': 'category'
+    },
+    parse_dates=["start_date"]
+)
 
 print(df.dtypes)
-# name        object
-# salary     float64
-# dept      category
+# id                     int64
+# name                  object
+# salary               float64
+# start_date    datetime64[ns]
+# dept                category
 # dtype: object
+
+#-----------
+## parse_dates=True with index_col="date_col"
+#-----------
+
+df = pd.read_csv(
+    filepath_or_buffer = '05_Pandas_DataR_dataframe/data/emp.csv', 
+    dtype = {
+        'name': 'str', # If set as 'string', it will be "string[python]", not "object"
+        'salary': 'float64',
+        'dept': 'category'
+    },
+    index_col="start_date",
+    parse_dates=True
+)
+
+print(df)
+#             id      name  salary        dept
+# start_date                                  
+# 2012-01-01   1      Rick  623.30          IT
+# 2013-09-23   2       Dan  515.20  Operations
+# 2014-11-15   3  Michelle  611.00          IT
+# 2014-05-11   4      Ryan  729.00          HR
+# 2015-03-27   5      Gary  843.25     Finance
+# 2013-05-21   6      Nina  578.00          IT
+# 2013-07-30   7     Simon  632.80  Operations
+# 2014-06-17   8      Guru  722.50     Finance
+'''The 'start_date' column is now the index and parsed as datetime.'''
 
 #############################
 ## With header= and names= ##
