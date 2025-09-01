@@ -89,3 +89,5 @@ Thumbs.db
 
 # vscode workspace file
 *.code-workspace
+
+test.py
