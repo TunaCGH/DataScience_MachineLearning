@@ -19,7 +19,8 @@
   + df.fillna(value): Returns a DataFrame with missing values filled with the specified value
   + df.fillna({dictionary}): Fill different columns with different values
   + df.fillna(df.mean()): Fill missing values with the mean of each column
-  + df.fillna(method=..., limit=...): Fill missing values using a specified method (e.g., 'ffill', 'bfill')
+  + df.ffill(): Fill missing values using forward fill method
+  + df.bfill(): Fill missing values using backward fill method
 
 5. Interpolate missing values:
   + df.interpolate(axis=...): linear interpolation
@@ -520,3 +521,102 @@ print(df_dropped_subset.info())
 #  25  share_of_spend             116 non-null    float64 
 # dtypes: category(2), float64(23), int64(1)
 # memory usage: 26.8 KB
+
+'''Here, 33 rows are dropped because they have missing values in either the 'top_of_mind' or 'spontaneous' columns.'''
+
+
+#--------------------------------------------------------------------------------------------------------------#
+#------------------------------------------ 4. Fill missing values --------------------------------------------#
+#--------------------------------------------------------------------------------------------------------------#
+
+# Drop "category" columns before filling NA with 0, avoid error
+df_missing = df_mkt.drop(["week", "year"], axis = 1)
+
+#################
+## df.fillna() ##
+#################
+'''Returns a DataFrame with missing values filled with the specified value'''
+
+df_filled = df_missing.fillna(0, inplace = False)
+
+print(df_filled.head())
+#    market_share  av_price_per_kg  non_promo_price_per_kg  ...  grp_outdoor  grp_print  share_of_spend
+# 0         38.40             7.61                    7.77  ...          0.0        0.0             0.0
+# 1         36.80             7.60                    7.80  ...          0.0        0.0             0.0
+# 2         35.21             7.63                    7.85  ...          0.0        0.0             0.0
+# 3         35.03             7.22                    7.76  ...          0.0        0.0             0.0
+# 4         32.37             7.70                    7.78  ...          0.0        0.0             0.0
+
+#############################
+## df.fillna({dictionary}) ##
+#############################
+'''Fill different columns with different values'''
+
+df_filled_dict = df_missing.fillna({
+    'top_of_mind': df_missing['top_of_mind'].mean(),
+    'spontaneous': df_missing['spontaneous'].median(),
+    'aided': df_missing['aided'].min(),
+    'penetration': df_missing['penetration'].max()
+}, inplace = False)
+
+print(df_filled_dict[['top_of_mind', 'spontaneous', 'aided', 'penetration']].head(10))
+#    top_of_mind  spontaneous  aided  penetration
+# 0    50.465041         78.2   95.7         76.8
+# 1    50.465041         78.2   95.7         76.8
+# 2    50.465041         78.2   95.7         76.8
+# 3    50.465041         78.2   95.7         76.8
+# 4    50.465041         78.2   95.7         76.8
+# 5    50.465041         78.2   95.7         76.8
+# 6    50.465041         78.2   95.7         76.8
+# 7    50.465041         78.2   95.7         76.8
+# 8    50.465041         78.2   95.7         76.8
+# 9    50.465041         78.2   95.7         76.8
+
+##########################
+## df.fillna(df.mean()) ##
+##########################
+'''Fill missing values with the mean of each column'''
+
+df_filled_mean = df_missing.fillna(df_missing.mean(), inplace = False)
+
+print(df_filled_mean.head())
+#    market_share  av_price_per_kg  non_promo_price_per_kg  ...  grp_outdoor  grp_print  share_of_spend
+# 0         38.40             7.61                    7.77  ...       1127.0  14.904545       45.314027
+# 1         36.80             7.60                    7.80  ...       1127.0  14.904545       45.314027
+# 2         35.21             7.63                    7.85  ...       1127.0  14.904545       45.314027
+# 3         35.03             7.22                    7.76  ...       1127.0  14.904545       45.314027
+# 4         32.37             7.70                    7.78  ...       1127.0  14.904545       45.314027
+
+################
+## df.ffill() ##
+################
+'''Fill missing values using forward fill method'''
+
+s_misisng = pd.Series([1, np.nan, np.nan, 4, 5, np.nan, 7])
+
+print(s_misisng.ffill())
+# 0    1.0
+# 1    1.0
+# 2    1.0
+# 3    4.0
+# 4    5.0
+# 5    5.0
+# 6    7.0
+# dtype: float64
+
+################
+## df.bfill() ##
+################
+'''Fill missing values using backward fill method'''
+
+s_misisng = pd.Series([1, np.nan, np.nan, 4, 5, np.nan, 7])
+
+print(s_misisng.bfill())
+# 0    1.0
+# 1    4.0
+# 2    4.0
+# 3    4.0
+# 4    5.0
+# 5    7.0
+# 6    7.0
+# dtype: float64
