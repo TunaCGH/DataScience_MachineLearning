@@ -146,7 +146,7 @@ where each vertical axis represents a variable.
 '''
 
 pd.plotting.parallel_coordinates(
-    frame = df_pokemon[["Attack", "Defense", "Type_1"]],
+    frame = df_pokemon[["Attack", "Defense", "Legendary"]],
     class_column = "Type_1",
     color = ("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"),
     colormap = "tab10",
