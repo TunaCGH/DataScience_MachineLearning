@@ -316,3 +316,127 @@ pd.plotting.bootstrap_plot(
 )
 plt.title("Bootstrap Plot of NO2 Levels in Paris")
 plt.show()
+
+
+#---------------------------------------------------------------------------------------------------------#
+#-------------------------------------- 8. pd.plotting.boxplot() -----------------------------------------#
+#---------------------------------------------------------------------------------------------------------#
+'''
+Creates box-and-whisker plots from DataFrame columns with optional grouping.
+
+Parameters:
+# data: DataFrame to plot
+# column: Column name(s) to plot
+# by: Column to group by
+# fontsize: Font size for labels
+# rot: Rotation angle for labels (default 0)
+# grid: Show grid (default True)
+# figsize: Figure size tuple
+# return_type: 'axes', 'dict', 'both', or None
+
+When to Use:
+# Comparing distributions across groups
+# Identifying outliers
+# Exploratory data analysis
+# Statistical summaries visualization
+'''
+
+# Attack ~ Legendary
+pd.plotting.boxplot(
+    data = df_pokemon,
+    column = "Attack",
+    by = "Legendary",
+    notch = True,
+    fontsize = 8,
+    rot = 45,
+    grid = True,
+    figsize = (10, 6),
+    return_type = "axes"
+)
+plt.title("Boxplot of Pokémon Attack by Legendary Status")
+plt.suptitle("")  # Suppress the automatic 'Boxplot grouped by ...' title
+plt.show()
+
+# Attack ~ Type_1 + Legendary
+pd.plotting.boxplot(
+    data = df_pokemon,
+    column = "Attack",
+    by = ["Type_1", "Legendary"],
+    notch = True,
+    fontsize = 8,
+    rot = 45,
+    grid = True,
+    figsize = (10, 6),
+    return_type = "axes"
+)
+plt.title("Boxplot of Pokémon Attack by Type 1 and Legendary Status")
+plt.suptitle("")  # Suppress the automatic 'Boxplot grouped by ...' title
+plt.show()
+
+
+#---------------------------------------------------------------------------------------------------------#
+#-------------------------------------- 9. pd.plotting.table() -------------------------------------------#
+#---------------------------------------------------------------------------------------------------------#
+'''
+Helper function to convert DataFrame/Series to matplotlib table for combined visualizations.
+
+Parameters:
+# ax: Matplotlib axes object
+# data: DataFrame or Series data
+# **kwargs: Additional table formatting arguments
+
+When to Use:
+# Adding data tables to plots
+# Creating combined chart-table visualizations
+# Detailed data presentation with plots
+'''
+
+fig, ax = plt.subplots(figsize=(8, 4))
+
+pd.plotting.table(
+    ax = ax,
+    data = df_aq.query("(country == 'FR') & (city == 'Paris')").head(5).set_index("date"),
+    loc = "upper right",
+    colWidths = [0.2] * len(df_aq.columns),
+    cellLoc = "center",
+    rowLoc = "center",
+    fontsize = 8
+)
+ax.set_title("NO2 Levels in Paris with Data Table")
+ax.axis("off") # Hide the axes for table only
+plt.show()
+
+
+#---------------------------------------------------------------------------------------------------------#
+#-------------------------- 10. pd.plotting.register_matplotlib_converters() -----------------------------#
+#---------------------------------------------------------------------------------------------------------#
+'''
+Registers pandas formatters and converters with matplotlib for proper datetime plotting.
+
+Key Features:
+# Modifies global matplotlib.units.registry dictionary
+# Adds custom converters for pandas datetime objects
+# Essential for plotting time-based data
+
+When to Use:
+# Plotting datetime/period data with matplotlib
+# Resolving datetime plotting errors
+# Ensuring proper date formatting in plots
+
+https://pandas.pydata.org/docs/reference/api/pandas.plotting.register_matplotlib_converters.html
+'''
+
+
+#---------------------------------------------------------------------------------------------------------#
+#------------------------ 11. pd.plotting.deregister_matplotlib_converters() -----------------------------#
+#---------------------------------------------------------------------------------------------------------#
+'''
+Removes pandas formatters and converters from matplotlib, restoring original state.
+
+When to Use:
+# Reverting matplotlib converter changes
+# Troubleshooting plotting issues
+# Restoring default matplotlib behavior
+
+https://pandas.pydata.org/docs/reference/api/pandas.plotting.deregister_matplotlib_converters.html
+'''
