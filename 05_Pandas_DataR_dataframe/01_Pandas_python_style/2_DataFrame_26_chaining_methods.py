@@ -18,6 +18,8 @@ by reducing the need for intermediate variables.
 3. Apply with .groupby()
 
 4. Apply with .plot() / .plot.method()
+
+5. All-in-one workflow example
 '''
 
 import pandas as pd
@@ -137,3 +139,68 @@ df_pokemon.plot.box(
     figsize = (10, 6)              # Size of the figure
 )
 plt.show() # Display the plot
+
+
+#--------------------------------------------------------------------------------------------------------------#
+#-------------------------------------------- 5. All-in-one workflow ------------------------------------------#
+#--------------------------------------------------------------------------------------------------------------#
+
+dict_subjects = {
+    'Toán':'Math',
+    'Ngữ văn':'Literature',
+    'Địa lí':'Geography',
+    'Lịch sử':'History',
+    'Tiếng Anh':'English',
+    'Sinh học':'Biology',
+    'Vật lí':'Physics',
+    'Hóa học':'Chemistry',
+}
+
+dict_translate = {
+    'Nam': 'Male',
+    'Nữ': 'Female',
+    'Sở GDĐT Bắc Giang': 'Bac Giang DET', # DET: Dept of Education and Training
+    'Sở GDĐT Hoà Bình': 'Hoa Binh DET',
+    'Sở GDĐT Thừa Thiên -Huế': 'Thua Thien - Hue DET',
+    'Trường Đại học Công nghiệp Tp. HCM': 'IUH' # IUH: Industrial University of Ho Chi Minh City
+}
+
+def rename_subjects(subjects_str):
+    for viet, eng in dict_subjects.items():
+        subjects_str = subjects_str.replace(viet, eng)
+    return subjects_str
+
+#######################
+
+df_bac = (
+    pd.read_excel("05_Pandas_DataR_dataframe/data/Baccalaureate_2016.xlsx")
+    .rename(columns = { # Change column names to English
+        "SOBAODANH": "ID",
+        "HO_TEN": "FULL_NAME",
+        "NGAY_SINH": "BIRTHDAY",
+        "TEN_CUMTHI": "EXAM_LOCATION",
+        "GIOI_TINH": "GENDER",
+        "DIEM_THI": "SCORE",
+    })
+    .assign(SCORE = lambda df: df['SCORE'].apply(rename_subjects)) # Change subject names into English
+    .replace(to_replace = dict_translate) # Translate other values into English
+    .assign(
+        BIRTHDAY = lambda df: pd.to_datetime(df['BIRTHDAY'], format='%d/%m/%Y', errors='coerce'), # Convert BIRTHDAY to datetime
+        EXAM_LOCATION = lambda df: df['EXAM_LOCATION'].astype('category'), # Convert EXAM_LOCATION to category
+        GENDER = lambda df: df['GENDER'].astype('category'), # Convert GENDER to category
+    )
+    .pipe(lambda df: # Split SCORE column into multiple subject columns
+          df.assign(**{subj: df['SCORE'].str.extract(fr'{subj}:\s*(\d+\.\d+)', expand=False).astype(float) for subj in dict_subjects.values()})
+    ) 
+    .drop(columns=['SCORE', 'BIRTHDAY', 'EXAM_LOCATION'])
+    .set_index('ID') 
+)
+
+print(df_bac.head())
+#                FULL_NAME  GENDER  Math  Literature  Geography  History  English  Biology  Physics  Chemistry
+# ID                                                                                                          
+# 018000001  DƯƠNG VIỆT AN    Male  2.00        5.50       5.00      3.0      NaN      NaN      NaN        NaN
+# 018000002      ĐỖ VĂN AN    Male  5.50        5.25       5.50      NaN     3.68      NaN      NaN        NaN
+# 018000003     ĐỖ XUÂN AN    Male  4.50        5.50       3.75      NaN     2.25      NaN      NaN        NaN
+# 018000004   ĐẶNG PHÚC AN  Female  3.00        6.00       5.50      NaN     1.50      NaN      NaN        NaN
+# 018000005    ĐẶNG VĂN AN    Male  2.25        4.75       5.25      NaN     2.00      NaN      NaN        NaN
