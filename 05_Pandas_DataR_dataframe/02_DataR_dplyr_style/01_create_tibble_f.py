@@ -11,7 +11,8 @@ DataR offers the "f" expression syntax, which allows for a more concise and read
 3. "f" expression syntax for DataFrame manipulation
 '''
 
-from datar.all import *
+import datar.all as dr
+from datar import f
 import pandas as pd
 
 # Suppress specific warnings from pipda
@@ -23,7 +24,7 @@ warnings.filterwarnings("ignore", category=PipeableCallCheckWarning)
 #-------------------------------- 1. Create dataframe using datar.tibble.tibble() ------------------------------------#
 #---------------------------------------------------------------------------------------------------------------------#
 
-tb = tibble(
+tb = dr.tibble(
     x = [1, 2, 3],
     y = ["a", "b", "c"],
     z = [True, False, True]
@@ -49,7 +50,7 @@ df = pd.DataFrame({
     'C': [True, False, True]
 })
 
-tb_from_df = tibble(df)
+tb_from_df = dr.tibble(df)
 
 print(tb_from_df)
 #         A        B      C
@@ -73,14 +74,14 @@ This also supports pandas DataFrame
 ## with tibble ##
 #################
 
-filtered_tb = tb >> filter_(f.x > 1)
+filtered_tb = tb >> dr.filter_(f.x > 1)
 print(filtered_tb)
 #         x        y      z
 #   <int64> <object> <bool>
 # 1       2        b  False
 # 2       3        c   True
 
-selected_tb = tb >> select(f['y'], f['z'])
+selected_tb = tb >> dr.select(f['y'], f['z'])
 print(selected_tb)
 #          y      z
 #   <object> <bool>
@@ -88,7 +89,7 @@ print(selected_tb)
 # 1        b  False
 # 2        c   True
 
-selected_tb2 = tb >> select(f[['x', 'z']])
+selected_tb2 = tb >> dr.select(f[['x', 'z']])
 print(selected_tb2)
 #         x      z
 #   <int64> <bool>
@@ -106,14 +107,14 @@ THIS WILL NOT WORK
 ## with pandas df ##
 ####################
 
-filtered_df = df >> filter_(f.A > 1)
+filtered_df = df >> dr.filter_(f.A > 1)
 print(filtered_df)
 #         A        B      C
 #   <int64> <object> <bool>
 # 1       2        y  False
 # 2       3        z   True
 
-selected_df = df >> select(f['B'], f['C'])
+selected_df = df >> dr.select(f['B'], f['C'])
 print(selected_df)
 #          B      C
 #   <object> <bool>

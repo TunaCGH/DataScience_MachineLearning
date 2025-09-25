@@ -2,7 +2,7 @@
 To read dataframe, just use pandas.read.....() functions, then convert to datar tibble if needed.
 '''
 
-from datar.all import *
+import datar.all as dr
 import pandas as pd
 
 # Suppress specific warnings from pipda
@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", category=PipeableCallCheckWarning)
 #------------------------------------- Read dataframe using pandas.read...() ----------------------------------------#
 #--------------------------------------------------------------------------------------------------------------------#
 
-tb_csv = tibble(pd.read_csv('05_Pandas_DataR_dataframe/data/air_quality_no2_long.csv'))
+tb_csv = dr.tibble(pd.read_csv('05_Pandas_DataR_dataframe/data/air_quality_no2_long.csv'))
 print(tb_csv.head())
 #       city  country                   date.utc location parameter     value     unit
 #   <object> <object>                   <object> <object>  <object> <float64> <object>
@@ -24,7 +24,7 @@ print(tb_csv.head())
 # 3    Paris       FR  2019-06-20 21:00:00+00:00  FR04014       no2      24.9    µg/m³
 # 4    Paris       FR  2019-06-20 20:00:00+00:00  FR04014       no2      21.4    µg/m³
 
-tb_excel = tibble(pd.read_excel("05_Pandas_DataR_dataframe/data/emp_sheetname.xlsx", sheet_name='emp'))
+tb_excel = dr.tibble(pd.read_excel("05_Pandas_DataR_dataframe/data/emp_sheetname.xlsx", sheet_name='emp'))
 print(tb_excel)
 #         id      name    salary       start_date        dept
 #   <object>  <object> <float64> <datetime64[ns]>    <object>

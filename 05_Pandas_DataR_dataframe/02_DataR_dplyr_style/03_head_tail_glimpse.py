@@ -4,7 +4,7 @@
 3. glimpse() - Transpose print of tibble, showing data types and a preview of data (like df.info())
 '''
 
-from datar.all import *
+import datar.all as dr
 import pandas as pd
 
 # Suppress specific warnings from pipda
@@ -12,7 +12,7 @@ import warnings
 from pipda.utils import PipeableCallCheckWarning
 warnings.filterwarnings("ignore", category=PipeableCallCheckWarning)
 
-tb_pokemon = tibble(
+tb_pokemon = dr.tibble(
     (
         pd.read_csv(
             filepath_or_buffer = "05_Pandas_DataR_dataframe/data/pokemon.csv",
@@ -84,7 +84,7 @@ print(tb_pokemon.tail())
 #--------------------------------------------------------------------------------------------------------------------#
 
 # Glimpse of the dataframe
-tb_pokemon >> glimpse()
+tb_pokemon >> dr.glimpse()
 # Rows: 800
 # Columns: 12
 # . Name       <object>   'Bulbasaur', 'Ivysaur', 'Venusaur', 'VenusaurMega Venusaur', 'Charmander', 'Charmeleon', 'Charizard',…
@@ -101,5 +101,5 @@ tb_pokemon >> glimpse()
 # . Legendary  <bool>     False, False, False, False, False, False, False, False, False, False, False, False, False, False, False,…
 
 '''
-glimpse(tb_pokemon) DOES NOT WORK, must use the pipe operator (>>)
+dr.glimpse(tb_pokemon) DOES NOT WORK, must use the pipe operator (>>)
 '''
