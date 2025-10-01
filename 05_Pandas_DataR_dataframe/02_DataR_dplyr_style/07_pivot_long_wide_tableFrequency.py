@@ -6,8 +6,13 @@
    + dr.pivot_wider(values_fn = ...)
    
 2. pivot_longer: dr.pivot_longer()
+   + basig usage
+   + dr.pivot_longer(cols = dr.starts_with())
+   + dr.pivot_longer(names_sep=)
+   + dr.pivot_longer(names_pattern=)
+   + Combine dr.pivot_longer() with dr.pivot_wider()
 
-3. crosstab: dr.table()
+3. crosstab, contigency/frequency table: dr.table()
 '''
 
 import datar.all as dr
@@ -146,3 +151,196 @@ print(
 # 1    North  248.782857  290.524737  239.141429
 # 2    South  284.672000  183.286000  244.672500
 # 3     West  256.096111  209.636957  409.786818
+
+
+#----------------------------------------------------------------------------------------------------------#
+#------------------------------------------ 2. dr.pivot_longer() ------------------------------------------#
+#----------------------------------------------------------------------------------------------------------#
+
+n_patients = 8
+patient_ids = [f"P{i:03d}" for i in range(1, n_patients+1)]
+
+np.random.seed(42)
+df_measurements = pd.DataFrame({
+    'patient_id' : patient_ids,
+    'age'        : np.random.randint(20, 80, size=n_patients),
+    # Day‑specific columns (wide format)
+    'BP_day1'    : np.random.randint(110, 150, size=n_patients), # BP = Blood Pressure
+    'HR_day1'    : np.random.randint(60, 100, size=n_patients), # HR = Heart Rate
+    'BP_day2'    : np.random.randint(110, 150, size=n_patients),
+    'HR_day2'    : np.random.randint(60, 100, size=n_patients),
+    'BP_day3'    : np.random.randint(110, 150, size=n_patients),
+    'HR_day3'    : np.random.randint(60, 100, size=n_patients)
+})
+
+print(df_measurements)
+#   patient_id  age  BP_day1  HR_day1  BP_day2  HR_day2  BP_day3  HR_day3
+# 0       P001   58      128       62      142       62      134       67
+# 1       P002   71      132       81      121       96      123       94
+# 2       P003   48      120       61      131       66      118       73
+# 3       P004   34      120       83      134       80      135       76
+# 4       P005   62      133       89      136       68      111       95
+# 5       P006   27      145       97      137       98      129       99
+# 6       P007   40      149       61      125       77      137       63
+# 7       P008   58      133       80      124       63      116       61
+
+###################################
+## dr.pivot_longer() basic usage ##
+###################################
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = f[f.BP_day1 : f.HR_day3], # Specify columns to pivot
+        names_to = 'measurement_day', # New column names
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.slice_head(n = 10)
+)
+#    HR_day3     age patient_id measurement_day   value
+#    <int64> <int64>   <object>        <object> <int64>
+# 0       67      58       P001         BP_day1     128
+# 1       94      71       P002         BP_day1     132
+# 2       73      48       P003         BP_day1     120
+# 3       76      34       P004         BP_day1     120
+# 4       95      62       P005         BP_day1     133
+# 5       99      27       P006         BP_day1     145
+# 6       63      40       P007         BP_day1     149
+# 7       61      58       P008         BP_day1     133
+# 8       67      58       P001         HR_day1      62
+# 9       94      71       P002         HR_day1      81
+
+##############################################
+## dr.pivot_longer(cols = dr.starts_with()) ##
+##############################################
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = dr.starts_with(match = ["BP", "HR"]), # Specify columns to pivot
+        names_to = 'measurement_day', # New column names
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.slice_head(n = 10)
+)
+#       age patient_id measurement_day   value
+#   <int64>   <object>        <object> <int64>
+# 0      58       P001         BP_day1     128
+# 1      71       P002         BP_day1     132
+# 2      48       P003         BP_day1     120
+# 3      34       P004         BP_day1     120
+# 4      62       P005         BP_day1     133
+# 5      27       P006         BP_day1     145
+# 6      40       P007         BP_day1     149
+# 7      58       P008         BP_day1     133
+# 8      58       P001         HR_day1      62
+# 9      71       P002         HR_day1      81
+
+#################################
+## dr.pivot_longer(names_sep=) ##
+#################################
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = dr.starts_with(match = ["BP", "HR"]), # Specify columns to pivot
+        names_sep = "_", # Separator between the new column names
+        names_to = ['measurement', 'day'], # New column names
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.slice_head(n = 10)
+)
+#    HR_day3     age patient_id measurement      day   value
+#    <int64> <int64>   <object>    <object> <object> <int64>
+# 0       67      58       P001          BP     day1     128
+# 1       94      71       P002          BP     day1     132
+# 2       73      48       P003          BP     day1     120
+# 3       76      34       P004          BP     day1     120
+# 4       95      62       P005          BP     day1     133
+# 5       99      27       P006          BP     day1     145
+# 6       63      40       P007          BP     day1     149
+# 7       61      58       P008          BP     day1     133
+# 8       67      58       P001          HR     day1      62
+# 9       94      71       P002          HR     day1      81
+
+#####################################
+## dr.pivot_longer(names_pattern=) ##
+#####################################
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = dr.starts_with(match = ["BP", "HR"]), # Specify columns to pivot
+        names_to = ['measurement', 'day'], # New column names
+        names_pattern = r"([A-Z]+)_(day\d+)", # Regex pattern to extract new column names
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.slice_head(n = 10)
+)
+#       age patient_id measurement      day   value
+#   <int64>   <object>    <object> <object> <int64>
+# 0      58       P001          BP     day1     128
+# 1      71       P002          BP     day1     132
+# 2      48       P003          BP     day1     120
+# 3      34       P004          BP     day1     120
+# 4      62       P005          BP     day1     133
+# 5      27       P006          BP     day1     145
+# 6      40       P007          BP     day1     149
+# 7      58       P008          BP     day1     133
+# 8      58       P001          HR     day1      62
+# 9      71       P002          HR     day1      81
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = dr.starts_with(match = ["BP", "HR"]), # Specify columns to pivot
+        names_to = ['measurement', 'day'], # New column names
+        names_pattern = r"([A-Z]+)_day(\d+)", # Take the integer part of the day only
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.slice_head(n = 10)
+)
+#       age patient_id measurement      day   value
+#   <int64>   <object>    <object> <object> <int64>
+# 0      58       P001          BP        1     128
+# 1      71       P002          BP        1     132
+# 2      48       P003          BP        1     120
+# 3      34       P004          BP        1     120
+# 4      62       P005          BP        1     133
+# 5      27       P006          BP        1     145
+# 6      40       P007          BP        1     149
+# 7      58       P008          BP        1     133
+# 8      58       P001          HR        1      62
+# 9      71       P002          HR        1      81
+
+
+#####################################################
+## Combine dr.pivot_longer() with dr.pivot_wider() ##
+#####################################################
+
+print(
+    df_measurements 
+    >> dr.pivot_longer(
+        cols = dr.starts_with(match = ["BP", "HR"]), # Specify columns to pivot
+        names_to = ['measurement', 'day'], # New column names
+        names_pattern = r"([A-Z]+)_day(\d+)", # Take the integer part of the day only
+        values_to = 'value' # Name of the new value column
+        )
+    >> dr.pivot_wider(
+        names_from = f.measurement,
+        values_from = f.value
+        )
+    >> dr.slice_head(n = 10)
+)
+#       age      day patient_id      BP      HR
+#   <int64> <object>   <object> <int64> <int64>
+# 0      27        1       P006     145      97
+# 1      27        2       P006     137      98
+# 2      27        3       P006     129      99
+# 3      34        1       P004     120      83
+# 4      34        2       P004     134      80
+# 5      34        3       P004     135      76
+# 6      40        1       P007     149      61
+# 7      40        2       P007     125      77
+# 8      40        3       P007     137      63
+# 9      48        1       P003     120      61
