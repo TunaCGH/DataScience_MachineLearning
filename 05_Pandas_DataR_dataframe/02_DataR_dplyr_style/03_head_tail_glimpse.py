@@ -7,10 +7,11 @@
 import datar.all as dr
 import pandas as pd
 
-# Suppress specific warnings from pipda
+# Suppress all warnings
 import warnings
-from pipda.utils import PipeableCallCheckWarning
-warnings.filterwarnings("ignore", category=PipeableCallCheckWarning)
+warnings.filterwarnings("ignore")
+
+########################
 
 tb_pokemon = dr.tibble(
     (
