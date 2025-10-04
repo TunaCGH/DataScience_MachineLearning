@@ -3,6 +3,7 @@
    + Normal usage: dr.select(f.col1, f.col2)
    + Range selection: dr.select(f[f.col1:f.col4]) (the end column is excluded)
    + Using index numbers: dr.select(f[0, 2, 4]) or dr.select(f[0:4]) (the end index is excluded)
+   + Using string function: dr.select(dr.starts_with("col")), dr.select(dr.ends_with("col")), dr.select(dr.contains("col"))
    + Exclusive selection: dr.select(~f.col1, ~f.col2), dr.select(~f[f.col2:f.col4]), dr.select(~f[1, 3]), dr.select(~f[0:3])
 
 2. dr.pull() - Pull a single column as a Series
@@ -112,6 +113,85 @@ print(
 # 6       7     Simon    632.80  2013-07-30
 # 7       8      Guru    722.50  2014-06-17
 
+###########################
+## Using string function ##
+###########################
+
+print(
+    tb_emp
+    >> dr.select(dr.starts_with("s")) # Select columns starting with "s"
+)
+#      salary  start_date
+#   <float64>    <object>
+# 0    623.30  2012-01-01
+# 1    515.20  2013-09-23
+# 2    611.00  2014-11-15
+# 3    729.00  2014-05-11
+# 4    843.25  2015-03-27
+# 5    578.00  2013-05-21
+# 6    632.80  2013-07-30
+# 7    722.50  2014-06-17
+
+print(
+    tb_emp
+    >> dr.select(dr.ends_with("e")) # Select columns ending with "e"
+)
+#        name  start_date
+#    <object>    <object>
+# 0      Rick  2012-01-01
+# 1       Dan  2013-09-23
+# 2  Michelle  2014-11-15
+# 3      Ryan  2014-05-11
+# 4      Gary  2015-03-27
+# 5      Nina  2013-05-21
+# 6     Simon  2013-07-30
+# 7      Guru  2014-06-17
+
+print(
+    tb_emp
+    >> dr.select(dr.contains("ar")) # Select columns containing "ar"
+)
+#      salary  start_date
+#   <float64>    <object>
+# 0    623.30  2012-01-01
+# 1    515.20  2013-09-23
+# 2    611.00  2014-11-15
+# 3    729.00  2014-05-11
+# 4    843.25  2015-03-27
+# 5    578.00  2013-05-21
+# 6    632.80  2013-07-30
+# 7    722.50  2014-06-17
+
+print(
+    tb_emp
+    >> dr.select(dr.starts_with("s") & dr.ends_with("e")) # Select columns starting with "s" AND ending with "e"
+)
+#    start_date
+#      <object>
+# 0  2012-01-01
+# 1  2013-09-23
+# 2  2014-11-15
+# 3  2014-05-11
+# 4  2015-03-27
+# 5  2013-05-21
+# 6  2013-07-30
+# 7  2014-06-17
+
+print(
+    tb_emp
+    >> dr.select(dr.starts_with("n") | dr.starts_with("s")) # Select columns starting with "n" OR starting with "s"
+)
+#        name    salary  start_date
+#    <object> <float64>    <object>
+# 0      Rick    623.30  2012-01-01
+# 1       Dan    515.20  2013-09-23
+# 2  Michelle    611.00  2014-11-15
+# 3      Ryan    729.00  2014-05-11
+# 4      Gary    843.25  2015-03-27
+# 5      Nina    578.00  2013-05-21
+# 6     Simon    632.80  2013-07-30
+# 7      Guru    722.50  2014-06-17
+
 #########################
 ## Exclusive selection ##
 #########################
@@ -180,6 +260,20 @@ print(
 # 6  2013-07-30  Operations
 # 7  2014-06-17     Finance
 
+print(
+    tb_emp
+    >> dr.select(~(dr.starts_with("s") | dr.starts_with("d"))) # Exclude columns starting with "s" OR starting with "d"
+)
+#        id      name
+#   <int64>  <object>
+# 0       1      Rick
+# 1       2       Dan
+# 2       3  Michelle
+# 3       4      Ryan
+# 4       5      Gary
+# 5       6      Nina
+# 6       7     Simon
+# 7       8      Guru
 
 #----------------------------------------------------------------------------------------------------------#
 #---------------------------- 2. dr.pull() - Pull a single column as a Series -----------------------------#
