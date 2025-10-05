@@ -153,7 +153,7 @@ print(df_pokemon[df_pokemon['Speed'].between(5, 10)]) # Speed between 100 and 15
 # 597  Ferroseed   Grass  Steel    305   44      50       91      24      86     10          5      False
 
 #-------------
-## == (equal) and != (not equal)
+## == (equal)
 #-------------
 
 print(df_pokemon[df_pokemon['Type_1'] == 'Fire']) # Type_1 equal to 'Fire'
