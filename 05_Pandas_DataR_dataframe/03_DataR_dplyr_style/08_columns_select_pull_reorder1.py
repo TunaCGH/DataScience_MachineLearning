@@ -1,6 +1,6 @@
 '''
 1. dr.select() - Select columns
-   + Normal usage: dr.select(f.col1, f.col2)
+   + Normal usage: dr.select(f.col1, f.col2), dr.select(f['col1'], f['col2']), dr.select(f[['col1', 'col2']])
    + Range selection: dr.select(f[f.col1:f.col4]) (the end column is excluded)
    + Using index numbers: dr.select(f[0, 2, 4]) or dr.select(f[0:4]) (the end index is excluded)
    + Using string function: dr.select(dr.starts_with("col")), dr.select(dr.ends_with("col")), dr.select(dr.contains("col"))
@@ -48,6 +48,36 @@ print(tb_emp)
 print(
     tb_emp
     >> dr.select(f.name, f.salary)
+)
+#        name    salary
+#    <object> <float64>
+# 0      Rick    623.30
+# 1       Dan    515.20
+# 2  Michelle    611.00
+# 3      Ryan    729.00
+# 4      Gary    843.25
+# 5      Nina    578.00
+# 6     Simon    632.80
+# 7      Guru    722.50
+
+print(
+    tb_emp
+    >> dr.select(f['name'], f['salary'])
+)
+#        name    salary
+#    <object> <float64>
+# 0      Rick    623.30
+# 1       Dan    515.20
+# 2  Michelle    611.00
+# 3      Ryan    729.00
+# 4      Gary    843.25
+# 5      Nina    578.00
+# 6     Simon    632.80
+# 7      Guru    722.50
+
+print(
+    tb_emp
+    >> dr.select(f[['name', 'salary']])
 )
 #        name    salary
 #    <object> <float64>
