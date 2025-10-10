@@ -1,6 +1,15 @@
 '''
 dr.summarise() is a transformation that aggregates data,
 by using aggregation functions like sum, mean, min, max, etc.
+
+############
+
+dr.summarise() with single column
+
+dr.summarise() with multiple columns
+ + Different aggregation functions
+ + Same aggregation function (dr.across())
+ + Same aggregation function with dr.where() (dr.across(dr.where()))
 '''
 
 import datar.all as dr
