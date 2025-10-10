@@ -10,6 +10,7 @@
 
 2. Change row names (index):
    + dr.column_to_rownames()
+   + combine dr.column_to_rownames() with dr.mutate()
    + dr.rownames_to_column() (dr.has_rownames() must be True)
    + Apply pandas method: (
         tb
@@ -123,6 +124,27 @@ print(tb_to_rownames.head())
 # 3  Michelle    611.00  2014-11-15          IT
 # 4      Ryan    729.00  2014-05-11          HR
 # 5      Gary    843.25  2015-03-27     Finance
+
+######################################################
+## Combine dr.column_to_rownames() with dr.mutate() ##
+######################################################
+
+print(
+    tb_emp
+    >> dr.select(~f.id)
+    >> dr.mutate(emp_id = [f"employee_{i}" for i in range(1, len(tb_emp) + 1)])
+    >> dr.column_to_rownames('emp_id')
+)
+#                 name    salary  start_date        dept
+#             <object> <float64>    <object>    <object>
+# employee_1      Rick    623.30  2012-01-01          IT
+# employee_2       Dan    515.20  2013-09-23  Operations
+# employee_3  Michelle    611.00  2014-11-15          IT
+# employee_4      Ryan    729.00  2014-05-11          HR
+# employee_5      Gary    843.25  2015-03-27     Finance
+# employee_6      Nina    578.00  2013-05-21          IT
+# employee_7     Simon    632.80  2013-07-30  Operations
+# employee_8      Guru    722.50  2014-06-17     Finance
 
 #############################
 ## dr.rownames_to_column() ##
