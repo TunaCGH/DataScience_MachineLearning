@@ -12,11 +12,7 @@
    + dr.column_to_rownames()
    + combine dr.column_to_rownames() with dr.mutate()
    + dr.rownames_to_column() (dr.has_rownames() must be True)
-   + Apply pandas method: (
-        tb
-        .set_index('id')
-        >> dr.filter_( f.salary > 600)
-   )
+   + Apply pandas method: with pipda.register_verb (set_index = register_verb(func = pd.DataFrame.set_index))
 '''
 
 import datar.all as dr
@@ -168,10 +164,15 @@ print(tb_from_rownames.head())
 ## pandas method ##
 ###################
 
+from pipda import register_verb
+
+set_index = register_verb(func = pd.DataFrame.set_index)
+dr.filter = register_verb(func = dr.filter_)
+
 tb_set_index = (
     tb_emp 
-    .set_index('id')
-    >> dr.filter_( f.salary > 600)
+    >> set_index('id')
+    >> dr.filter( f.salary > 600)
 )
 
 print(tb_set_index.head())
